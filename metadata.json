@@ -1,0 +1,37 @@
+{
+    "title": "WITOIL-for-Imagine",
+    "summary": "Medslik-II Oil fate lagrangian model",
+    "description": [
+        "WITOIL-for-Imagine is an application using the DEEPaaS API.\n",
+        "Medslik-II Oil fate lagrangian model"
+    ],
+    "keywords": [
+        "docker",
+        "api-v2"
+    ],
+    "license": "No license file",
+    "date_creation": "2024-09-13",
+    "sources": {
+        "dockerfile_repo": "https://github.com/ai4os-hub/witoil-for-imagine",
+        "docker_registry_repo": "ai4oshub/witoil-for-imagine",
+        "code": "https://github.com/ai4os-hub/witoil-for-imagine",
+        "ai4_template": "ai4-template-adv/2.0.1"
+    },
+    "continuous_integration": {
+        "build_status_badge": "https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/witoil-for-imagine/main",
+        "build_status_url": "https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/witoil-for-imagine/job/main/"
+    },
+    "tosca": [
+        {
+            "title": "Mesos (CPU)",
+            "url": "https://raw.githubusercontent.com/indigo-dc/tosca-templates/master/deep-oc/deep-oc-marathon-webdav.yml",
+            "inputs": [
+                "rclone_conf",
+                "rclone_url",
+                "rclone_vendor",
+                "rclone_user",
+                "rclone_pass"
+            ]
+        }
+    ]
+}

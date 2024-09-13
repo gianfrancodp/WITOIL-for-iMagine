@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "witoil-for-imagine"
+authors = [
+    { name = "Igor Atake", email = "igor.atake@cmcc.it" },
+    { name = "Gabriele Accarino", email = "gabriele.accarino@cmcc.it" },
+    { name = "Marco Decarlo", email = "marco.decarlo@cmcc.it" },
+    { name = "Giovanni Coppini", email = "giovanni.coppini@cmcc.it" },
+]
+description = "Medslik-II Oil fate lagrangian model"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "No license file" }
+classifiers = [
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: AI/ML/DL Researchers",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+]
+dynamic = ["version", "dependencies"]
+
+[project.urls]
+"Homepage" = "https://github.com/ai4os-hub/witoil-for-imagine"
+"Bug Tracker" = "https://github.com/ai4os-hub/witoil-for-imagine/issues"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+env = [
+    "WITOIL_FOR_IMAGINE_DATA_PATH=tests/data",
+    "WITOIL_FOR_IMAGINE_MODELS_PATH=tests/models",
+]
+# Allow test files to share names
+# https://docs.pytest.org/en/7.1.x/explanation/goodpractices.html
+addopts = "--import-mode=importlib"
+
+[tool.setuptools]
+packages = [
+    "witoil_for_imagine",
+    "witoil_for_imagine.api",
+]
+
+[tool.setuptools.package-dir]
+"witoil_for_imagine.api" = "api"
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+version = { file = "VERSION" }
+
+[project.entry-points."deepaas.v2.model"]
+witoil_for_imagine = "witoil_for_imagine.api"
