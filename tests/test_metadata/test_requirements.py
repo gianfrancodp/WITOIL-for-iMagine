@@ -22,14 +22,14 @@ the same folder. However, remember to add the prefix `test_` to the file.
 def test_authors(metadata):
     """Tests that metadata provides authors information."""
     assert "author" in metadata
-    assert metadata["author"] == ["Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"]
+    assert metadata["author"] == ["Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"]
 
 
 def test_emails(metadata):
     """Tests that metadata provides authors information."""
     assert "author-email" in metadata
     assert metadata["author-email"] == {
-        "Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini": "igor.atake@cmcc.it, gabriele.accarino@cmcc.it, marco.decarlo@cmcc.it, giovanni.coppini@cmcc.it"
+        "Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini": "elnaz.azmi@kit.edu, khadijeh.alibabaei@kit.edu, igor.atake@cmcc.it, gabriele.accarino@cmcc.it, marco.decarlo@cmcc.it, giovanni.coppini@cmcc.it"
     }
 
 

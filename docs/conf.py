@@ -186,7 +186,7 @@ latex_documents = [
     ('index',
      'witoil_for_imagine.tex',
      u'witoil-for-imagine Documentation',
-     u"Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini", 'manual'),
+     u"Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini", 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -216,7 +216,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'witoil_for_imagine', u'witoil-for-imagine Documentation',
-     [u"Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"], 1)
+     [u"Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -230,7 +230,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'witoil_for_imagine', u'witoil-for-imagine Documentation',
-     u"Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini", 'witoil-for-imagine',
+     u"Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini", 'witoil-for-imagine',
      'Medslik-II Oil fate lagrangian model', 'Miscellaneous'),
 ]
 

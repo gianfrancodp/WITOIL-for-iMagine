@@ -15,7 +15,7 @@ ARG tag=2.9.1
 # Base image, e.g. tensorflow/tensorflow:2.x.x-gpu
 FROM tensorflow/tensorflow:${tag}
 
-LABEL maintainer='Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini'
+LABEL maintainer='Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini'
 LABEL version='0.0.1'
 # Medslik-II Oil fate lagrangian model
 
