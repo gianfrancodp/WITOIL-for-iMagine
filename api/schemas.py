@@ -134,27 +134,6 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[28],  # Assuming '28' is a placeholder; adjust based on actual use case.
     )
-        
-    download_data = fields.Boolean(
-        metadata={
-            "description": "Whether to download data.",
-        },
-        load_default=True,
-    )
-
-    download_curr = fields.Boolean(
-        metadata={
-            "description": "Whether to download current data.",
-        },
-        load_default=True,
-    )
-
-    download_wind = fields.Boolean(
-        metadata={
-            "description": "Whether to download wind data.",
-        },
-        load_default=True,
-    )
 
     preproc_path = fields.String(
         metadata={
@@ -192,55 +171,6 @@ class PredArgsSchema(marshmallow.Schema):
             "description": "List of longitude values.",
         },
         load_default=[17, 19.5],
-    )
-        
-    bathymetry_path = fields.String(
-        metadata={
-            "description": "Path to the GEBCO 2023 bathymetry file.",
-        },
-        load_default="data/gebco/GEBCO_2023.nc",
-    )
-    
-    coastline_path = fields.String(
-        metadata={
-            "description": "Path to the coastline shapefile (GSHHS).",
-        },
-        load_default="data/gshhs/f/GSHHS_f_L1.shp",
-    )
-    
-    preprocessing_metoce = fields.Boolean(
-        metadata={
-            "description": "Whether to preprocess MET/OCE data.",
-        },
-        load_default=True,
-    )
-    
-    preprocessing_dtm = fields.Boolean(
-        metadata={
-            "description": "Whether to preprocess DTM data.",
-        },
-        load_default=True,
-    )
-    
-    run_model = fields.Boolean(
-        metadata={
-            "description": "Whether to run the model.",
-        },
-        load_default=True,
-    )
-    
-    postprocessing = fields.Boolean(
-        metadata={
-            "description": "Whether to perform postprocessing (conversion from particles to concentration).",
-        },
-        load_default=True,
-    )
-    
-    plotting = fields.Boolean(
-        metadata={
-            "description": "Whether to enable plotting.",
-        },
-        load_default=True,
     )
     
     define_boundaries = fields.Boolean(
