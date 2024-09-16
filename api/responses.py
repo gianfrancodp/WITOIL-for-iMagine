@@ -89,7 +89,66 @@ def pdf_response(result, **options):
         raise RuntimeError("Unsupported response type") from err
 
 
+def png_response(results, **options):
+    logger.debug("Response result type: %d", type(results))
+    logger.debug("Response result: %d", results)
+    logger.debug("Response options: %d", options)
+    try:
+        for result in results[0]:
+            # this will return a numpy array with the labels
+            result = result.plot(
+                labels=options["show_labels"],
+                conf=options["show_conf"],
+                boxes=options["show_boxes"],
+                font_size=6.0,
+            )
+            success, buffer = cv2.imencode(".png", result)
+            if not success:
+                return "Error encoding image", 500
+
+            # Create a BytesIO object and write the buffer into it
+            image_buffer = BytesIO(buffer)
+
+        return image_buffer
+    except Exception as err:  # TODO: Fix to specific exception
+        logger.warning("Error converting result to png: %s", err)
+        raise RuntimeError("Unsupported response type") from err
+
+
+def mp4_response(results, **options):
+    """Converts the prediction or training results into
+    mp4 return format.
+
+    Arguments:
+        result -- Result value from call, expected either dict or str
+        options -- Not used, added for illustration purpose.
+
+    Raises:
+        RuntimeError: Unsupported response type.
+
+    Returns:
+        Converted result into mp4 buffer format.
+    """
+    # Process MP4 video response
+    logger.debug("Response result type: %d", type(results))
+    logger.debug("Response result: %d", results)
+    logger.debug("Response options: %d", options)
+    new_results = []
+    for result in results[0]:
+        # this will return a numpy array with the labels
+        new_results.append(
+            result.plot(
+                labels=options["show_labels"],
+                conf=options["show_conf"],
+                boxes=options["show_boxes"],
+            )
+        )
+    message = create_video_in_buffer(new_results)
+    return message
+
 content_types = {
-    "application/json": json_response,
-    "application/pdf": pdf_response,
+#    "application/json": json_response,
+#    "application/pdf": pdf_response,
+    "image/png": png_response,
+    "video/mp4": mp4_response,
 }

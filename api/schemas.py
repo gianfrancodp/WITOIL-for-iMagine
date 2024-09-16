@@ -44,22 +44,228 @@ class PredArgsSchema(marshmallow.Schema):
         # pylint: disable=too-few-public-methods
         ordered = True
 
-    model_name = ModelName(
+#    model_name = ModelName(
+#        metadata={
+#            "description": "String/Path identification for models.",
+#        },
+#        required=True,
+#    )
+#
+#    input_file = fields.Field(
+#        metadata={
+#            "description": "File with np.arrays for predictions.",
+#            "type": "file",
+#            "location": "form",
+#        },
+#        required=True,
+#    )
+#        
+    name = fields.String(
         metadata={
-            "description": "String/Path identification for models.",
+            "description": "Name of the simulation. If None or "", default name is used.",
         },
-        required=True,
+        load_default="syria",
+    )
+        
+    start_datetime = fields.String(
+        metadata={
+            "description": "Start date of the simulation.",
+        },
+        load_default="",
+    )
+    sim_length = fields.Float(
+        metadata={
+            "description": "Length of the simulation in hours.",
+        },
+        load_default=48.0,
+    )
+    
+    time_step = fields.Integer(
+        metadata={
+            "description": "Simulation time step in seconds.",
+        },
+        load_default=1800,
+    )
+    
+    spill_lat = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of latitudes of the oil spill.",
+        },
+        load_default=[33],
+    )
+    
+    spill_lon = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of longitudes of the oil spill.",
+        },
+        load_default=[33],
+    )
+    
+    spill_duration = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of durations of the oil spill in hours. 0 for instantaneous release.",
+        },
+        load_default=[0.0],
+    )
+    
+    spill_rate = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of spill rates in tons per hour.",
+        },
+        load_default=[100.5],
+    )
+    
+    slick_age = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of ages of the oil slick in hours.",
+        },
+        load_default=[0.0],
+    )
+    
+    oil = fields.List(
+        cls_or_instance=fields.String,
+        metadata={
+            "description": "List of either API of the oil or names. Names must be exact.",
+        },
+        load_default=[28],  # Assuming '28' is a placeholder; adjust based on actual use case.
+    )
+        
+    download_data = fields.Boolean(
+        metadata={
+            "description": "Whether to download data.",
+        },
+        load_default=True,
     )
 
-    input_file = fields.Field(
+    download_curr = fields.Boolean(
         metadata={
-            "description": "File with np.arrays for predictions.",
-            "type": "file",
-            "location": "form",
+            "description": "Whether to download current data.",
         },
-        required=True,
+        load_default=True,
     )
 
+    download_wind = fields.Boolean(
+        metadata={
+            "description": "Whether to download wind data.",
+        },
+        load_default=True,
+    )
+
+    preproc_path = fields.String(
+        metadata={
+            "description": "Where preprocessed MET/OCE data should be placed.",
+        },
+        load_default="cases/",
+    )
+    
+    set_domain = fields.Boolean(
+        metadata={
+            "description": "Whether to set the domain.",
+        },
+        load_default=False,
+    )
+    
+    delta = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "Default distance in degrees to download or crop data if lat and lon areas are not provided.",
+        },
+        load_default=[0.75],
+    )
+    
+    lat = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of latitude values.",
+        },
+        load_default=[39, 41],
+    )
+    
+    lon = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "List of longitude values.",
+        },
+        load_default=[17, 19.5],
+    )
+        
+    bathymetry_path = fields.String(
+        metadata={
+            "description": "Path to the GEBCO 2023 bathymetry file.",
+        },
+        load_default="data/gebco/GEBCO_2023.nc",
+    )
+    
+    coastline_path = fields.String(
+        metadata={
+            "description": "Path to the coastline shapefile (GSHHS).",
+        },
+        load_default="data/gshhs/f/GSHHS_f_L1.shp",
+    )
+    
+    preprocessing_metoce = fields.Boolean(
+        metadata={
+            "description": "Whether to preprocess MET/OCE data.",
+        },
+        load_default=True,
+    )
+    
+    preprocessing_dtm = fields.Boolean(
+        metadata={
+            "description": "Whether to preprocess DTM data.",
+        },
+        load_default=True,
+    )
+    
+    run_model = fields.Boolean(
+        metadata={
+            "description": "Whether to run the model.",
+        },
+        load_default=True,
+    )
+    
+    postprocessing = fields.Boolean(
+        metadata={
+            "description": "Whether to perform postprocessing (conversion from particles to concentration).",
+        },
+        load_default=True,
+    )
+    
+    plotting = fields.Boolean(
+        metadata={
+            "description": "Whether to enable plotting.",
+        },
+        load_default=True,
+    )
+    
+    define_boundaries = fields.Boolean(
+        metadata={
+            "description": "Whether to define boundaries for plotting.",
+        },
+        load_default=False,
+    )
+    
+    plot_lon = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "Longitudinal boundaries for plotting.",
+        },
+        load_default=[-64.1, -63.5],
+    )
+    
+    plot_lat = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "Latitudinal boundaries for plotting.",
+        },
+        load_default=[10.6, 11],
+    )
+        
     accept = fields.String(
         metadata={
             "description": "Return format for method response.",

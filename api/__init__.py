@@ -9,6 +9,7 @@ docs [1] and at a canonical exemplar module [2].
 import logging
 
 import witoil_for_imagine as aimodel
+import Medslik.main as medsim
 
 from . import config, responses, schemas, utils
 
@@ -74,10 +75,11 @@ def predict(model_name, input_file, accept='application/json', **options):
         The predicted model values (dict or str) or files.
     """
     try:  # Call your AI model predict() method
-        logger.info("Using model %s for predictions", model_name)
-        logger.debug("Loading data from input_file: %s", input_file.filename)
-        logger.debug("Predict with options: %s", options)
-        result = aimodel.predict(model_name, input_file.filename, **options)
+#        logger.info("Using model %s for predictions", model_name)
+#        logger.debug("Loading data from input_file: %s", input_file.filename)
+#        logger.debug("Predict with options: %s", options)
+#        result = aimodel.predict(model_name, input_file.filename, **options)
+        result = medsim(arg["config"])
         logger.debug("Predict result: %s", result)
         logger.info("Returning content_type for: %s", accept)
         return responses.content_types[accept](result, **options)

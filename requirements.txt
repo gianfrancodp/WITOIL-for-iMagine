@@ -1,5 +1,5 @@
 # DEEPaaS framework requirements
-deepaas~=2.1.0
+deepaas~=2.5.0
 webargs~=5.5.2
 flaat~=1.1.1
 
