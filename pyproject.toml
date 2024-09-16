@@ -5,6 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "witoil-for-imagine"
 authors = [
+    { name = "Elnaz Azmi", email = "elnaz.azmi@kit.edu" },
+    { name = "Fahimeh Alibabaei", email = "khadijeh.alibabaei@kit.edu" },
     { name = "Igor Atake", email = "igor.atake@cmcc.it" },
     { name = "Gabriele Accarino", email = "gabriele.accarino@cmcc.it" },
     { name = "Marco Decarlo", email = "marco.decarlo@cmcc.it" },
