@@ -1,0 +1,33 @@
+# .sqa/config.yml - jenkins-pipeline-library configuration file
+sqa_criteria:
+  qc_style:
+    repos:
+      WITOIL-for-iMagine:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.sty
+  qc_coverage:
+    repos:
+      WITOIL-for-iMagine:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.cov
+  qc_security:
+    repos:
+      WITOIL-for-iMagine:
+        container: testing
+        tox:
+          tox_file: tox.ini
+          testenv:
+            - qc.sec
+
+environment:
+  GIT_COMMITTER_NAME: "Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"
+  GIT_COMMITTER_EMAIL: "elnaz.azmi@kit.edu, khadijeh.alibabaei@kit.edu, igor.atake@cmcc.it, gabriele.accarino@cmcc.it, marco.decarlo@cmcc.it, giovanni.coppini@cmcc.it"
+  LANG: C.UTF-8
+
+timeout: 600
