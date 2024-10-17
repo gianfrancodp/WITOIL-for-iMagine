@@ -89,6 +89,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     spill_lat = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of latitudes of the oil spill.",
         },
@@ -97,6 +98,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     spill_lon = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of longitudes of the oil spill.",
         },
@@ -105,6 +107,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     spill_duration = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of durations of the oil spill in hours. 0 for instantaneous release.",
         },
@@ -113,6 +116,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     spill_rate = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of spill rates in tons per hour.",
         },
@@ -121,6 +125,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     slick_age = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of ages of the oil slick in hours.",
         },
@@ -129,10 +134,11 @@ class PredArgsSchema(marshmallow.Schema):
     
     oil = fields.List(
         cls_or_instance=fields.String,
+        validate=validate.Length(max=5),
         metadata={
             "description": "List of either API of the oil or names. Names must be exact.",
         },
-        load_default=[28],  # Assuming '28' is a placeholder; adjust based on actual use case.
+        load_default=[28],
     )
 
     preproc_path = fields.String(
@@ -151,6 +157,7 @@ class PredArgsSchema(marshmallow.Schema):
     
     delta = fields.List(
         cls_or_instance=fields.Float,
+        validate=validate.Length(max=5),
         metadata={
             "description": "Default distance in degrees to download or crop data if lat and lon areas are not provided.",
         },

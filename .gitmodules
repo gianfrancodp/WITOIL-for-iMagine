@@ -1,0 +1,3 @@
+[submodule "WITOIL_iMagine"]
+	path = WITOIL_iMagine
+	url = https://github.com/CMCC-Foundation/WITOIL_iMagine.git
