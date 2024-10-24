@@ -26,7 +26,7 @@ description: |-
    To obtain oceanographic data for the simulation, a Copernicus username and password are required.
 
    If the user does not already have an account, they can register here: https://data.marine.copernicus.eu/register?redirect=%2Fproducts
-   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/images/CMEMS.png'/>
+   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/tutorial/images/CMEMS.png'/>
   
    Once the account is created, the user should store their username and password for future use.
 
@@ -40,12 +40,12 @@ description: |-
    After completing the registration, the user will have access to the Climate Data Store. From there, they can retrieve their token from their user profile at: https://cds.climate.copernicus.eu/profile
    
    The token will be located under the "Personal Access Token" section.
-   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/images/access_token_ERA5.png'/>
+   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/tutorial/images/access_token_ERA5.png'/>
 
    The last step, which is somewhat hidden, is to accept the terms of use for the dataset. The user needs to navigate to the ERA5 single layer page: https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download
    
    The user needs to scroll down to the bottom of the page until the terms of usage appear, and then they should accept them.
-   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/images/Terms_of_usage_ERA5.png'/>
+   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/tutorial/images/Terms_of_usage_ERA5.png'/>
 
 
    RUNNING WITOIL FOR iMAGINE
@@ -55,7 +55,7 @@ description: |-
    Once all the information is entered, the user simply needs to click the "Run" button to execute the simulation.
 
    After running the application, the results will be displayed through graphics and animations, allowing for an analysis of oil dispersion in the environment. The user will see graphical representations of oil concentrations over time, as well as vectors indicating the direction and intensity of currents and winds, as represented below. These results are crucial for understanding the potential impact of an oil spill and assisting in decision-making for damage mitigation.
-   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/images/oil_concentration_algeria.gif'/>
+   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/tutorial/images/oil_concentration_algeria.gif'/>
  
 
   **References**
