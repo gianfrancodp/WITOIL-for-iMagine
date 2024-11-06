@@ -9,7 +9,7 @@ import io
 import logging
 import cv2
 from io import BytesIO
-from fpdf import FPDF
+# from fpdf import FPDF
 import tempfile
 import os
 import glob
@@ -51,45 +51,45 @@ def json_response(result, **options):
 
 # EXAMPLE of pdf_response parser function
 # = HAVE TO MODIFY FOR YOUR NEEDS =
-def pdf_response(result, **options):
-    """Converts the prediction results into pdf return format.
+# def pdf_response(result, **options):
+#     """Converts the prediction results into pdf return format.
 
-    Arguments:
-        result -- Result value from call, expected either dict or str
-          (see https://docs.deep-hybrid-datacloud.eu/projects/deepaas/en/stable/user/v2-api.html).
-        options -- Not used, added for illustration purpose.
+#     Arguments:
+#         result -- Result value from call, expected either dict or str
+#           (see https://docs.deep-hybrid-datacloud.eu/projects/deepaas/en/stable/user/v2-api.html).
+#         options -- Not used, added for illustration purpose.
 
-    Raises:
-        RuntimeError: Unsupported response type.
+#     Raises:
+#         RuntimeError: Unsupported response type.
 
-    Returns:
-        Converted result into pdf buffer format.
-    """
-    logger.debug("Response result type: %d", type(result))
-    logger.debug("Response result: %d", result)
-    logger.debug("Response options: %d", options)
-    try:
-        # 1. create BytesIO object
-        buffer = io.BytesIO()
-        buffer.name = "output.pdf"
-        # 2. write the output of the method in the buffer
-        #    For the proper PDF document, you may use:
-        #    * matplotlib for images
-        #    * fPDF2 for text documents (pip3 install fPDF2)
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("helvetica", size=12)
-        # in this EXAMPLE we also add input parameters
-        print_out = {"input": str(options), "predictions": str(result)}
-        pdf.multi_cell(w=0, txt=str(print_out).replace(",", ",\n"))
-        pdf_output = pdf.output(dest="S")
-        buffer.write(pdf_output)
-        # 3. rewind buffer to the beginning
-        buffer.seek(0)
-        return buffer
-    except Exception as err:  # TODO: Fix to specific exception
-        logger.warning("Error converting result to pdf: %s", err)
-        raise RuntimeError("Unsupported response type") from err
+#     Returns:
+#         Converted result into pdf buffer format.
+#     """
+#     logger.debug("Response result type: %d", type(result))
+#     logger.debug("Response result: %d", result)
+#     logger.debug("Response options: %d", options)
+#     try:
+#         # 1. create BytesIO object
+#         buffer = io.BytesIO()
+#         buffer.name = "output.pdf"
+#         # 2. write the output of the method in the buffer
+#         #    For the proper PDF document, you may use:
+#         #    * matplotlib for images
+#         #    * fPDF2 for text documents (pip3 install fPDF2)
+#         pdf = FPDF()
+#         pdf.add_page()
+#         pdf.set_font("helvetica", size=12)
+#         # in this EXAMPLE we also add input parameters
+#         print_out = {"input": str(options), "predictions": str(result)}
+#         pdf.multi_cell(w=0, txt=str(print_out).replace(",", ",\n"))
+#         pdf_output = pdf.output(dest="S")
+#         buffer.write(pdf_output)
+#         # 3. rewind buffer to the beginning
+#         buffer.seek(0)
+#         return buffer
+#     except Exception as err:  # TODO: Fix to specific exception
+#         logger.warning("Error converting result to pdf: %s", err)
+#         raise RuntimeError("Unsupported response type") from err
 
 
 def png_response(results, **options):
@@ -99,7 +99,7 @@ def png_response(results, **options):
 
     check = 0
     last_img = None
-    for file_name in glob.glob(results+'/*'):
+    for file_name in glob.glob(results+'/surf*'):
         fts = os.path.getmtime(file_name)
         if fts > check:
             check = fts
@@ -107,7 +107,10 @@ def png_response(results, **options):
     print(last_img)
 
     try:
-        success, buffer = cv2.imencode(results+last_img)
+        # Passing path of image as parameter 
+        img = cv2.imread(last_img) 
+
+        success, buffer = cv2.imencode('.png',img)
         if not success:
             return "Error encoding image", 500
 

@@ -485,7 +485,7 @@ def main_run(config_path=None):
         except:
             pass
 
-    shutil.copy("WITOIL_iMagine/medslik_run.log", f"{main.out_directory}medslik_run.log")
+    # shutil.copy("WITOIL_iMagine/medslik_run.log", f"{main.out_directory}medslik_run.log")
 
-    if config_path is None:
-        shutil.copy("WITOIL_iMagine/config.toml", f"{main.out_directory}config.toml")
+    # if config_path is None:
+    #     shutil.copy("WITOIL_iMagine/config.toml", f"{main.out_directory}config.toml")

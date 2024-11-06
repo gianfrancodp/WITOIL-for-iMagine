@@ -13,6 +13,10 @@ from . import interface as witoil
 
 from . import config, responses, schemas, utils
 
+import glob
+
+import os
+
 logger = logging.getLogger(__name__)
 logger.setLevel(config.LOG_LEVEL)
 
@@ -93,8 +97,16 @@ def predict(**options):
         conf.close()
 
         witoil.main_run("WITOIL_iMagine/config.toml")
-        result = "WITOIL_iMagine/cases/"+options['name']+"out_files/figures/"
+        result = "WITOIL_iMagine/cases/"+options['name']+"/out_files/figures/"
+
         logger.debug("Predict result: %s", result)
+
+        logger.info(
+                "Returning content_type for: %s", options["accept"]
+            )
+
+        return responses.png_response(result,**options)
+    
     except Exception as err:(
         logger.error("Error calculating predictions: %s", err, exc_info=True))
     raise  # Reraise the exception after log
