@@ -7,6 +7,7 @@ sqa_criteria:
         tox:
           tox_file: tox.ini
           testenv:
+            - sh -c 'git submodule update --init --remote --recursive'
             - qc.sty
   qc_coverage:
     repos:
@@ -15,6 +16,7 @@ sqa_criteria:
         tox:
           tox_file: tox.ini
           testenv:
+            - sh -c 'git submodule update --init --remote --recursive'
             - qc.cov
   qc_security:
     repos:
@@ -23,6 +25,7 @@ sqa_criteria:
         tox:
           tox_file: tox.ini
           testenv:
+            - sh -c 'git submodule update --init --remote --recursive'
             - qc.sec
 
 environment:

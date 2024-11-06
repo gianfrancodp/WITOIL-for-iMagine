@@ -10,10 +10,10 @@
 # Be Aware! For the Jenkins CI/CD pipeline, 
 # input args are defined inside the JenkinsConstants.groovy, not here!
 
-ARG tag=2.9.1
+ARG tag=3.12
 
 # Base image, e.g. tensorflow/tensorflow:2.x.x-gpu
-FROM tensorflow/tensorflow:${tag}
+FROM python:${tag}
 
 LABEL maintainer='Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini'
 LABEL version='0.0.1'
@@ -28,6 +28,7 @@ ARG branch=main
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y --no-install-recommends \
     gcc \
+    libgl1 \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -55,7 +56,7 @@ RUN git clone https://github.com/ai4os/deep-start /srv/.deep-start && \
 ENV SHELL /bin/bash
 
 # Install Data Version Control
-RUN pip3 install --no-cache-dir dvc dvc-webdav
+# RUN pip3 install --no-cache-dir dvc dvc-webdav
 
 # Install rclone (needed if syncing with NextCloud for training; otherwise remove)
 RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
@@ -68,12 +69,14 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
-RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
-    pip3 install --no-cache-dir -e ./witoil-for-imagine
+# RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
+#    pip3 install --no-cache-dir -e ./witoil-for-imagine
+ADD . /srv/witoil-for-imagine
 
+RUN pip3 install --no-cache-dir -e /srv/witoil-for-imagine
 # Open ports: DEEPaaS (5000), Monitoring (6006), Jupyter (8888)
 EXPOSE 5000 6006 8888
 
 # Launch deepaas
-ENTRYPOINT [ "deep-start" ]
-CMD ["--deepaas"]
+# ENTRYPOINT [ "deep-start" ]
+CMD ["deep-start"]

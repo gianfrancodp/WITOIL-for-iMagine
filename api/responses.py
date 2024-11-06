@@ -7,9 +7,12 @@ need to modify them for your needs.
 """
 import io
 import logging
-
+import cv2
+from io import BytesIO
 from fpdf import FPDF
-
+import tempfile
+import os
+import glob
 from . import config
 
 logger = logging.getLogger(__name__)
@@ -93,27 +96,51 @@ def png_response(results, **options):
     logger.debug("Response result type: %d", type(results))
     logger.debug("Response result: %d", results)
     logger.debug("Response options: %d", options)
-    try:
-        for result in results[0]:
-            # this will return a numpy array with the labels
-            result = result.plot(
-                labels=options["show_labels"],
-                conf=options["show_conf"],
-                boxes=options["show_boxes"],
-                font_size=6.0,
-            )
-            success, buffer = cv2.imencode(".png", result)
-            if not success:
-                return "Error encoding image", 500
 
-            # Create a BytesIO object and write the buffer into it
-            image_buffer = BytesIO(buffer)
+    check = 0
+    last_img = None
+    for file_name in glob.glob(results+'/*'):
+        fts = os.path.getmtime(file_name)
+        if fts > check:
+            check = fts
+            last_img = file_name
+    print(last_img)
+
+    try:
+        success, buffer = cv2.imencode(results+last_img)
+        if not success:
+            return "Error encoding image", 500
+
+        # Create a BytesIO object and write the buffer into it
+        image_buffer = BytesIO(buffer)
 
         return image_buffer
     except Exception as err:  # TODO: Fix to specific exception
         logger.warning("Error converting result to png: %s", err)
         raise RuntimeError("Unsupported response type") from err
 
+def create_video_in_buffer(frame_arrays, output_format="mp4"):
+    height, width, _ = frame_arrays[0].shape
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+
+    with tempfile.NamedTemporaryFile(
+        suffix="." + output_format, delete=False
+    ) as temp_file:
+        temp_filename = temp_file.name
+        out = cv2.VideoWriter(
+            temp_filename, fourcc, 20.0, (width, height)
+        )
+
+        for frame in frame_arrays:
+            out.write(frame)
+
+        out.release()
+
+    final_filename = "output.mp4"
+    os.rename(temp_filename, final_filename)
+    # Open the renamed file for reading
+    message = open(final_filename, "rb")
+    return message
 
 def mp4_response(results, **options):
     """Converts the prediction or training results into

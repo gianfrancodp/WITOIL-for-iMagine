@@ -8,8 +8,8 @@ docs [1] and at a canonical exemplar module [2].
 """
 import logging
 
-import witoil_for_imagine as aimodel
-# import Medslik.main as medsim
+import toml
+from . import interface as witoil
 
 from . import config, responses, schemas, utils
 
@@ -44,22 +44,8 @@ def get_metadata():
         raise  # Reraise the exception after log
 
 
-def warm():
-    """Function to run preparation phase before anything else can start.
-
-    Raises:
-        RuntimeError: Unexpected errors aim to stop model loading.
-    """
-    try:  # Call your AI model warm() method
-        logger.info("Warming up the model.api...")
-        aimodel.warm()
-    except Exception as err:
-        logger.error("Error when warming up: %s", err, exc_info=True)
-        raise RuntimeError(reason=err) from err
-
-
 @utils.predict_arguments(schema=schemas.PredArgsSchema)
-def predict(model_name, input_file, accept='application/json', **options):
+def predict(**options):
     """Performs model prediction from given input data and parameters.
 
     Arguments:
@@ -72,45 +58,44 @@ def predict(model_name, input_file, accept='application/json', **options):
         HTTPException: Unexpected errors aim to return 50X
 
     Returns:
-        The predicted model values (dict or str) or files.
+        The predicted model values png, pdf or mp4 file.
     """
+
+    logger.debug("Predict with args: %s", options)
     try:  # Call your AI model predict() method
-#        logger.info("Using model %s for predictions", model_name)
-#        logger.debug("Loading data from input_file: %s", input_file.filename)
-#        logger.debug("Predict with options: %s", options)
-        result = aimodel.predict(model_name, input_file.filename, **options)
-#        result = medsim(arg["config"])
+        # Load config.toml and modify the user inputs
+        tdata = toml.load("WITOIL_iMagine/config.toml")
+
+        tdata['simulation']['name'] = options['name']
+        tdata['simulation']['start_datetime'] = options['start_datetime']
+        tdata['simulation']['sim_length'] = options['sim_length']
+        tdata['simulation']['spill_lat'] = options['spill_lat']
+        tdata['simulation']['spill_lon'] = options['spill_lon']
+        tdata['simulation']['spill_duration'] = options['spill_duration']
+        tdata['simulation']['spill_rate'] = options['spill_rate']
+        tdata['simulation']['slick_age'] = options['slick_age']
+        tdata['simulation']['oil'] = options['oil']
+        tdata['simulation']['area_spill'] = options['area_spill']
+        tdata['simulation']['area_vertex'] = options['area_vertex']
+        tdata['simulation']['multiple_slick'] = options['multiple_slick']
+        tdata['download']['copernicus_user'] = options['copernicus_user']
+        tdata['download']['copernicus_password'] = options['copernicus_password']
+        tdata['download']['cds_token'] = options['cds_token']
+        tdata['input_files']['set_domain'] = options['set_domain']
+        tdata['input_files']['lat'] = options['lat']
+        tdata['input_files']['lon'] = options['lon']
+        tdata['input_files']['delta'] = options['delta']
+        tdata['plot_options']['plot_lon'] = options['plot_lon']
+        tdata['plot_options']['plot_lat'] = options['plot_lat']
+
+        conf = open("WITOIL_iMagine/config.toml",'w')
+        toml.dump(tdata, conf)
+        conf.close()
+
+        witoil.main_run("WITOIL_iMagine/config.toml")
+        result = "WITOIL_iMagine/cases/"+options['name']+"out_files/figures/"
         logger.debug("Predict result: %s", result)
-        logger.info("Returning content_type for: %s", accept)
-        return responses.content_types[accept](result, **options)
-    except Exception as err:
-        logger.error("Error calculating predictions: %s", err, exc_info=True)
-        raise  # Reraise the exception after log
-
-
-@utils.train_arguments(schema=schemas.TrainArgsSchema)
-def train(model_name, input_file, **options):
-    """Performs model training from given input data and parameters.
-
-    Arguments:
-        model_name -- Model name from registry to use for training values.
-        input_file -- File with data and labels to use for training.
-        **options -- Arbitrary keyword arguments from TrainArgsSchema.
-
-    Raises:
-        HTTPException: Unexpected errors aim to return 50X
-
-    Returns:
-        Parsed history/summary of the training process.
-    """
-    try:  # Call your AI model train() method
-        logger.info("Using model %s for training", model_name)
-        logger.debug("Loading data from input_file: %s", input_file)
-        logger.debug("Training with options: %s", options)
-        result = aimodel.train(model_name, input_file, **options)
-        logger.debug("Training result: %s", result)
-        return result
-    except Exception as err:
-        logger.error("Error while training: %s", err, exc_info=True)
-        raise  # Reraise the exception after log
+    except Exception as err:(
+        logger.error("Error calculating predictions: %s", err, exc_info=True))
+    raise  # Reraise the exception after log
 

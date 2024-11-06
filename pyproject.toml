@@ -39,16 +39,14 @@ env = [
 addopts = "--import-mode=importlib"
 
 [tool.setuptools]
-packages = [
-    "witoil_for_imagine",
-    "witoil_for_imagine.api",
-]
+packages = ["WITOIL_iMagine", "witoil_for_imagine.api"]
 
 [tool.setuptools.package-dir]
 "witoil_for_imagine.api" = "api"
+"WITOIL_iMagine" = "WITOIL_iMagine"
 
 [tool.setuptools.dynamic]
-dependencies = { file = ["requirements.txt"] }
+dependencies = { file = ["WITOIL_iMagine/requirements.txt", "requirements.txt"] }
 version = { file = "VERSION" }
 
 [project.entry-points."deepaas.v2.model"]

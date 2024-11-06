@@ -13,7 +13,7 @@ from importlib import metadata
 
 # Ensure that your model package has a config.py file with the following
 # pylint: disable=unused-import
-from witoil_for_imagine.config import DATA_PATH, MODELS_PATH
+# from witoil_for_imagine.config import DATA_PATH, MODELS_PATH
 
 # Get AI model metadata
 API_NAME = "witoil_for_imagine"

@@ -64,68 +64,61 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "Name of the simulation. If None or "", default name is used.",
         },
-        load_default="syria",
+        load_default="my_experiment",
     )
         
-    start_datetime = fields.String(
+    start_datetime = fields.DateTime(
         metadata={
-            "description": "Start date of the simulation.",
+            "description": "Start date of the simulation in the format of YYYY-MM-DDTHH:MM:SS as this example 2021-08-21T03:43:00.",
         },
-        load_default="",
+        #load_default="2021-08-21T03:43:00",
     )
     sim_length = fields.Float(
         metadata={
             "description": "Length of the simulation in hours.",
         },
-        load_default=48.0,
-    )
-    
-    time_step = fields.Integer(
-        metadata={
-            "description": "Simulation time step in seconds.",
-        },
-        load_default=1800,
+        load_default=24.0,
     )
     
     spill_lat = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
-            "description": "List of latitudes of the oil spill.",
+            "description": "List of latitudes of the oil spill (deg N).",
         },
-        load_default=[33],
+        load_default=[35.25],
     )
     
     spill_lon = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
-            "description": "List of longitudes of the oil spill.",
+            "description": "List of longitudes of the oil spill (deg E).",
         },
-        load_default=[33],
+        load_default=[35.90],
     )
     
     spill_duration = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
-            "description": "List of durations of the oil spill in hours. 0 for instantaneous release.",
+            "description": "List of durations of the oil spill in hours. 0.0 for instantaneous release.",
         },
         load_default=[0.0],
     )
     
     spill_rate = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
             "description": "List of spill rates in tons per hour.",
         },
-        load_default=[100.5],
+        load_default=[27.78],
     )
-    
+
     slick_age = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
             "description": "List of ages of the oil slick in hours.",
         },
@@ -133,43 +126,74 @@ class PredArgsSchema(marshmallow.Schema):
     )
     
     oil = fields.List(
-        cls_or_instance=fields.String,
-        validate=validate.Length(max=5),
+        cls_or_instance=fields.Float,
+        validate=validate.Length(min=1,max=5),
         metadata={
-            "description": "List of either API of the oil or names. Names must be exact.",
+            "description": "List of either API (number) of the oil or names (string). Names must be exact.",
         },
         load_default=[28],
     )
 
-    preproc_path = fields.String(
+    area_spill = fields.Boolean(
         metadata={
-            "description": "Where preprocessed MET/OCE data should be placed.",
-        },
-        load_default="cases/",
-    )
-    
-    set_domain = fields.Boolean(
-        metadata={
-            "description": "Whether to set the domain.",
+            "description": "Whether area or points should be used for the spill.",
         },
         load_default=False,
     )
-    
-    delta = fields.List(
-        cls_or_instance=fields.Float,
-        validate=validate.Length(max=5),
+
+    area_vertex = fields.Boolean(
         metadata={
-            "description": "Default distance in degrees to download or crop data if lat and lon areas are not provided.",
+            "description": "Comprehends three levels of lists. 1st: all slicks. 2nd: individual slick. 3rd: Coordinates of each vertex in each individual slick.",
         },
-        load_default=[0.75],
+        load_default=False,
     )
-    
+
+    multiple_slick = fields.Boolean(
+        metadata={
+            "description": "Whether there are multiple slicks.",
+        },
+        load_default=False,
+    )
+
+    copernicus_user = fields.String(
+        required=True,
+        validate=validate.Length(min=1),
+        metadata={
+            "description": "User for downloading COPERNICUS data.",
+        }
+    )
+
+    copernicus_password = fields.String(
+        required=True,
+        validate=validate.Length(min=1),
+        load_only=True,
+        metadata={
+            "description": "Password for downloading COPERNICUS data.",
+        }
+    )
+
+    cds_token = fields.String(
+        required=True,
+        validate=validate.Length(min=1),
+        load_only=True,
+        metadata={
+            "description": "Token for downloading ERA5 data.",
+        }
+    )
+
+    set_domain = fields.Boolean(
+        metadata={
+            "description": "Whether the user wants to set the domain for cropping/preprocessing input data.",
+        },
+        load_default=False,
+    )
+
     lat = fields.List(
         cls_or_instance=fields.Float,
         metadata={
             "description": "List of latitude values.",
         },
-        load_default=[39, 41],
+        load_default=[31, 38],
     )
     
     lon = fields.List(
@@ -177,14 +201,16 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "List of longitude values.",
         },
-        load_default=[17, 19.5],
+        load_default=[32, 37],
     )
-    
-    define_boundaries = fields.Boolean(
+
+    delta = fields.List(
+        cls_or_instance=fields.Float,
+        validate=validate.Length(min=1, max=5),
         metadata={
-            "description": "Whether to define boundaries for plotting.",
+            "description": "default domain length in degrees (applied to both lon/lat), to download or crop data. delta is used only if set_domain = false.",
         },
-        load_default=False,
+        load_default=[0.75],
     )
     
     plot_lon = fields.List(
@@ -192,7 +218,7 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "Longitudinal boundaries for plotting.",
         },
-        load_default=[-64.1, -63.5],
+        load_default=[35.5, 36.5],
     )
     
     plot_lat = fields.List(
@@ -200,7 +226,7 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "Latitudinal boundaries for plotting.",
         },
-        load_default=[10.6, 11],
+        load_default=[35, 36],
     )
         
     accept = fields.String(
