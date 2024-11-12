@@ -13,7 +13,7 @@
 ARG tag=base
 
 # Base image, e.g. tensorflow/tensorflow:2.x.x-gpu
-FROM ai4os-hub/witoil-for-imagine:${tag}
+FROM ai4oshub/witoil-for-imagine:${tag}
 
 LABEL maintainer='Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini'
 LABEL version='0.0.1'
