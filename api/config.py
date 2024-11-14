@@ -10,10 +10,17 @@ By convention, the CONSTANTS defined in this module are in UPPER_CASE.
 import logging
 import os
 from importlib import metadata
+from pathlib import Path
 
 # Ensure that your model package has a config.py file with the following
 # pylint: disable=unused-import
 # from witoil_for_imagine.config import DATA_PATH, MODELS_PATH
+
+# DEEPaaS can load more than one installed models. Therefore, to
+# avoid conflicts, each default PATH environment variables should lead to
+# a different folder. The current practice is to use the path from where the
+# model source is located.
+BASE_PATH = Path(__file__).resolve(strict=True).parents[1]
 
 # Get AI model metadata
 API_NAME = "witoil_for_imagine"

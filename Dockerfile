@@ -62,11 +62,10 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
-#RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
-#    cd witoil-for-imagine && \
-#    git submodule update --init --recursive --remote && \
-ADD . /srv/witoil-for-imagine
-RUN cd witoil-for-imagine && pip3 install --no-cache-dir -e .
+RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
+    cd witoil-for-imagine && \
+    git submodule update --init --recursive --remote && \
+    pip3 install --no-cache-dir -e .
 
 # (force) remove WITOIL_iMagine/data/{gebco|gshhs} directories
 # and link to the Gebco Bathymetry and GSHHS Coastline directories

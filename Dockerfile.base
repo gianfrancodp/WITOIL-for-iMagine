@@ -99,6 +99,7 @@ RUN mkdir -p /data/gebco \
     && cd /data/gebco \
     && wget -O ${GEBCO}.zip https://www.bodc.ac.uk/data/open_download/gebco/${GEBCO}/zip/ \
     && unzip -o ${GEBCO}.zip \
+    && mv /data/gebco/*.nc /data/gebco/GEBCO.nc \
     && rm -f ${GEBCO}.zip
 
 # Downloading GSHHS Coastline data.
