@@ -169,6 +169,7 @@ class PredArgsSchema(marshmallow.Schema):
         load_only=True,
         metadata={
             "description": "Password for downloading COPERNICUS data.",
+            "format": "password",
         }
     )
 
@@ -178,6 +179,7 @@ class PredArgsSchema(marshmallow.Schema):
         load_only=True,
         metadata={
             "description": "Token for downloading ERA5 data.",
+            "format": "password",
         }
     )
 
