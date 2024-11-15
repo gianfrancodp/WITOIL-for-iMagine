@@ -62,12 +62,12 @@ description: |-
   1. De Dominicis M., N. Pinardi, G. Zodiatis, R. Lardner. [MEDSLIK-II, a Lagrangian marine surface oil spill model for short-term forecasting - Part 1: Theory](https://doi.org/10.5194/gmd-6-1851-2013). Geosci. Model Dev., 6, 1851-1869, 2013.
   2. De Dominicis M., N. Pinardi, G. Zodiatis, R. Archetti [MEDSLIK-II, a Lagrangian marine surface oil spill model for short-term forecasting - Part 2: Numerical simulations and validations](https://doi.org/10.5194/gmd-6-1871-2013). Geosci. Model Dev., 6, 1851-1869, 2013.
 
-doi:
- - https://doi.org/10.5194/gmd-6-1851-2013
- - https://doi.org/10.5194/gmd-6-1871-2013
+#doi:
+# - https://doi.org/10.5194/gmd-6-1851-2013
+# - https://doi.org/10.5194/gmd-6-1871-2013
 dates:
-  created: 2024-09-13
-  updated: 2024-09-24
+  created: '2024-09-13'
+  updated: '2024-09-24'
 links:
   ai4_template: ai4-template-adv/2.0.1
   source_code: https://github.com/ai4os-hub/witoil-for-imagine
@@ -91,4 +91,3 @@ data-type:
   - Text
   - Time Series
 
-  
