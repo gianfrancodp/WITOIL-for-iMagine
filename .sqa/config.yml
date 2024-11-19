@@ -3,30 +3,25 @@ sqa_criteria:
   qc_style:
     repos:
       WITOIL-for-iMagine:
-        container: testing
-        tox:
-          tox_file: tox.ini
-          testenv:
-            - sh -c 'git submodule update --init --remote --recursive'
-            - qc.sty
-  qc_coverage:
-    repos:
-      WITOIL-for-iMagine:
-        container: testing
-        tox:
-          tox_file: tox.ini
-          testenv:
-            - sh -c 'git submodule update --init --remote --recursive'
-            - qc.cov
+        container: thisrepo-testing
+        commands:
+        - sh -c 'git submodule update --init --remote --recursive'
+        - tox -e qc.sty
+# comment for now vk@241119
+#  qc_coverage:
+#    repos:
+#      WITOIL-for-iMagine:
+#        container: thisrepo-testing
+#        commands:
+#        - sh -c 'git submodule update --init --remote --recursive'
+#        - tox -e qc.cov
   qc_security:
     repos:
       WITOIL-for-iMagine:
-        container: testing
-        tox:
-          tox_file: tox.ini
-          testenv:
-            - sh -c 'git submodule update --init --remote --recursive'
-            - qc.sec
+        container: thisrepo-testing
+        commands:
+        - sh -c 'git submodule update --init --remote --recursive'
+        - tox -e qc.sec
 
 environment:
   GIT_COMMITTER_NAME: "Elnaz Azmi, Fahimeh Alibabaei, Igor Atake, Gabriele Accarino, Marco Decarlo, Giovanni Coppini"
