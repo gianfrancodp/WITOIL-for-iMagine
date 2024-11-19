@@ -8,12 +8,12 @@ import groovy.transform.Field
 @Field
 def dockerfile = 'Dockerfile'
 
+// comment base_tag(s) and rely on the Dockerfile
+//@Field
+//def base_cpu_tag = '2.9.1'
 
-@Field
-def base_cpu_tag = '2.9.1'
-
-@Field
-def base_gpu_tag = '2.9.1-gpu'
+//@Field
+//def base_gpu_tag = '2.9.1-gpu'
 
 
 
