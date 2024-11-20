@@ -22,7 +22,9 @@ file_handler = logging.FileHandler("medslik_run.log", mode="w")
 file_handler.setLevel(logging.DEBUG)
 
 # Create a formatter and set it for the handler
-formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 file_handler.setFormatter(formatter)
 
 # Add the file handler to the logger
@@ -41,14 +43,19 @@ class MedslikII:
         self.config = config
         # Create experiment directories
         self.root_directory = os.path.join(
-            self.config["simulation"]["experiment_path"], config["simulation"]["name"]
+            self.config["simulation"]["experiment_path"],
+            config["simulation"]["name"],
         )
         os.makedirs(self.root_directory, exist_ok=True)
-        self.out_directory = os.path.join(self.root_directory, "out_files")
+        self.out_directory = os.path.join(
+            self.root_directory, "out_files"
+        )
         os.makedirs(self.out_directory, exist_ok=True)
         self.out_figures = os.path.join(self.out_directory, "figures")
         os.makedirs(self.out_figures, exist_ok=True)
-        self.xp_directory = os.path.join(self.root_directory, "xp_files")
+        self.xp_directory = os.path.join(
+            self.root_directory, "xp_files"
+        )
         os.makedirs(self.xp_directory, exist_ok=True)
         spill_lat = np.array(self.config["simulation"]["spill_lat"])
         self.n_spill_points = np.shape(spill_lat)[0]
@@ -63,10 +70,12 @@ class MedslikII:
                 config["input_files"]["lon"][0],
                 config["input_files"]["lon"][1],
             )
-        #Domain is based on a delta degrees
+        # Domain is based on a delta degrees
         else:
-            logger.info(f"Domain defined around simulation point, \
-                using {config['input_files']['delta'][0]} degrees")
+            logger.info(
+                f"Domain defined around simulation point, \
+                using {config['input_files']['delta'][0]} degrees"
+            )
             latitude = config["simulation"]["spill_lat"][0]
             longitude = config["simulation"]["spill_lon"][0]
 
@@ -104,19 +113,27 @@ class MedslikII:
         lat = self.config["simulation"]["spill_lat"]
         lon = self.config["simulation"]["spill_lon"]
         # function to check if the spill location was put into land
-        coastline_path = self.config["input_files"]["dtm"]["coastline_path"]
+        coastline_path = self.config["input_files"]["dtm"][
+            "coastline_path"
+        ]
         sea = Utils.check_land(lon, lat, coastline_path)
         if sea == 0:
             raise ValueError(
                 "Your coordinates lie within land. Please check your values again"
             )
         # checking dates
-        dt = Utils.validate_date(self.config["simulation"]["start_datetime"])
-        logger.info("No major issues found on dates and oil spill coordinates")
+        dt = Utils.validate_date(
+            self.config["simulation"]["start_datetime"]
+        )
+        logger.info(
+            "No major issues found on dates and oil spill coordinates"
+        )
 
         # checking if starting from area spill
         if self.config["input_files"]["shapefile"]["shape_path"]:
-            shapefile_path = self.config["input_files"]["shapefile"]["shape_path"]
+            shapefile_path = self.config["input_files"]["shapefile"][
+                "shape_path"
+            ]
             # if simulation starts from shapefile, the volume will be disconsidered
             if os.path.exists(shapefile_path):
                 logger.info(
@@ -131,7 +148,7 @@ class MedslikII:
 
     @staticmethod
     def data_download_medslik(
-            config: dict, domain: list[float], root_directory: str
+        config: dict, domain: list[float], root_directory: str
     ) -> None:
         """
         Download METOCE datasets.
@@ -142,20 +159,32 @@ class MedslikII:
 
         date = pd.to_datetime(config["simulation"]["start_datetime"])
 
-        identifier = str(date.year) + str(date.month).zfill(2) + str(date.day).zfill(2)
+        identifier = (
+            str(date.year)
+            + str(date.month).zfill(2)
+            + str(date.day).zfill(2)
+        )
 
         inidate = date - pd.Timedelta(hours=1)
-        enddate = date + pd.Timedelta(hours=config["simulation"]["sim_length"] + 24)
+        enddate = date + pd.Timedelta(
+            hours=config["simulation"]["sim_length"] + 24
+        )
 
-        if 30.37 < np.mean([lat_min, lat_max]) < 45.7 and -17.25 < np.mean([lon_min, lon_max]) < 36:
+        if (
+            30.37 < np.mean([lat_min, lat_max]) < 45.7
+            and -17.25 < np.mean([lon_min, lon_max]) < 36
+        ):
             down = "local"
         else:
             down = "global"
 
         if config["download"]["download_curr"]:
             output_path = "WITOIL_iMagine/data/COPERNICUS/"
-            output_name = output_path + "Copernicus{}_{}_{}_mdk.nc".format(
-                "{}", identifier, config["simulation"]["name"]
+            output_name = (
+                output_path
+                + "Copernicus{}_{}_{}_mdk.nc".format(
+                    "{}", identifier, config["simulation"]["name"]
+                )
             )
 
             logger.info("Downloading CMEMS currents")
@@ -182,7 +211,9 @@ class MedslikII:
                 shell=True,
             )
             subprocess.run(
-                [f'rm {output_path}*{identifier}*{config["simulation"]["name"]}*.nc'],
+                [
+                    f'rm {output_path}*{identifier}*{config["simulation"]["name"]}*.nc'
+                ],
                 shell=True,
             )
 
@@ -191,8 +222,11 @@ class MedslikII:
             write_cds(config["download"]["cds_token"])
 
             output_path = "WITOIL_iMagine/data/ERA5/"
-            output_name = output_path + "era5_winds10_{}_{}_mdk.nc".format(
-                identifier, config["simulation"]["name"]
+            output_name = (
+                output_path
+                + "era5_winds10_{}_{}_mdk.nc".format(
+                    identifier, config["simulation"]["name"]
+                )
             )
 
             logger.info("Downloading ERA5 reanalysis winds")
@@ -206,7 +240,9 @@ class MedslikII:
                 output_path=output_path,
                 output_name=output_name,
             )
-            process_era5(output_path=output_path, output_name=output_name)
+            process_era5(
+                output_path=output_path, output_name=output_name
+            )
 
             subprocess.run(
                 [
@@ -215,37 +251,59 @@ class MedslikII:
                 shell=True,
             )
             subprocess.run(
-                [f'rm {output_path}*{identifier}*{config["simulation"]["name"]}*.nc'],
+                [
+                    f'rm {output_path}*{identifier}*{config["simulation"]["name"]}*.nc'
+                ],
                 shell=True,
             )
 
-    def run_preproc(config: dict, exp_folder: str, lon_min, lon_max, lat_min, lat_max, n_spill_points):
+    def run_preproc(
+        config: dict,
+        exp_folder: str,
+        lon_min,
+        lon_max,
+        lat_min,
+        lat_max,
+        n_spill_points,
+    ):
         """
         Run preprocessing.
         """
 
         domain = [lon_min, lon_max, lat_min, lat_max]
-        preproc = PreProcessing(config=config, exp_folder=exp_folder, domain=domain)
+        preproc = PreProcessing(
+            config=config, exp_folder=exp_folder, domain=domain
+        )
         # Create folders
         preproc.create_directories()
 
         # download data if needed
         if config["download"]["download_data"] == True:
-            MedslikII.data_download_medslik(config, domain, exp_folder)
+            MedslikII.data_download_medslik(
+                config, domain, exp_folder
+            )
 
         if config["run_options"]["preprocessing"]:
 
             if config["run_options"]["preprocessing_metoce"]:
-                oce_path = config["input_files"]["metoce"]["oce_data_path"]
-                met_path = config["input_files"]["metoce"]["met_data_path"]
+                oce_path = config["input_files"]["metoce"][
+                    "oce_data_path"
+                ]
+                met_path = config["input_files"]["metoce"][
+                    "met_data_path"
+                ]
                 if oce_path == "":
                     oce_path = None
                 if met_path == "":
                     met_path = None
                 # create Medslik-II current file inputs
-                preproc.process_currents(oce_path=f"{exp_folder}/oce_files/")
+                preproc.process_currents(
+                    oce_path=f"{exp_folder}/oce_files/"
+                )
                 # create Medslik-II wind file inputs
-                preproc.process_winds(met_path=f"{exp_folder}/met_files/")
+                preproc.process_winds(
+                    met_path=f"{exp_folder}/met_files/"
+                )
 
             if config["run_options"]["preprocessing_dtm"]:
                 # use the same grid on currents to crop bathymetry
@@ -260,7 +318,9 @@ class MedslikII:
                 )
 
             if config["input_files"]["shapefile"]["shape_path"]:
-                shapefile_path = config["input_files"]["shapefile"]["shape_path"]
+                shapefile_path = config["input_files"]["shapefile"][
+                    "shape_path"
+                ]
                 if os.path.exists(shapefile_path):
                     # using an area spill identified on a shapefile to generate initial conditions
                     preproc.process_initial_shapefile()
@@ -276,42 +336,58 @@ class MedslikII:
                     spill_dictionary["dt_sim"] = config["simulation"][
                         "start_datetime"
                     ]
-                    spill_dictionary["sim_length"] = preproc.sim_length
-                    spill_dictionary["longitude"] = config["simulation"][
-                        "spill_lon"
-                    ][i]
-                    spill_dictionary["latitude"] = config["simulation"][
-                        "spill_lat"
-                    ][i]
+                    spill_dictionary["sim_length"] = (
+                        preproc.sim_length
+                    )
+                    spill_dictionary["longitude"] = config[
+                        "simulation"
+                    ]["spill_lon"][i]
+                    spill_dictionary["latitude"] = config[
+                        "simulation"
+                    ]["spill_lat"][i]
                     spill_dictionary["spill_duration"] = int(
                         config["simulation"]["spill_duration"][i]
                     )
-                    spill_dictionary["spill_rate"] = config["simulation"][
-                        "spill_rate"
-                    ][i]
-                    spill_dictionary["oil_api"] = config["simulation"]["oil"][i]
+                    spill_dictionary["spill_rate"] = config[
+                        "simulation"
+                    ]["spill_rate"][i]
+                    spill_dictionary["oil_api"] = config[
+                        "simulation"
+                    ]["oil"][i]
                     spill_dictionary["number_slick"] = 1
                     preproc.write_config_files(
-                        spill_dictionary, separate_slicks=True, s_num=i
+                        spill_dictionary,
+                        separate_slicks=True,
+                        s_num=i,
                     )
 
             else:
                 logger.info("Writing single slick event")
                 spill_dictionary["simname"] = preproc.simname
-                spill_dictionary["dt_sim"] = config["simulation"]["start_datetime"]
-                spill_dictionary["sim_length"] = int(preproc.sim_length)
-                spill_dictionary["longitude"] = config["simulation"]["spill_lon"][
-                    0
+                spill_dictionary["dt_sim"] = config["simulation"][
+                    "start_datetime"
                 ]
-                spill_dictionary["latitude"] = config["simulation"]["spill_lat"][0]
+                spill_dictionary["sim_length"] = int(
+                    preproc.sim_length
+                )
+                spill_dictionary["longitude"] = config["simulation"][
+                    "spill_lon"
+                ][0]
+                spill_dictionary["latitude"] = config["simulation"][
+                    "spill_lat"
+                ][0]
                 spill_dictionary["spill_duration"] = int(
                     config["simulation"]["spill_duration"][0]
                 )
                 spill_dictionary["spill_rate"] = config["simulation"][
                     "spill_rate"
                 ][0]
-                spill_dictionary["oil_api"] = config["simulation"]["oil"][0]
-                preproc.write_config_files(spill_dictionary, separate_slicks=False)
+                spill_dictionary["oil_api"] = config["simulation"][
+                    "oil"
+                ][0]
+                preproc.write_config_files(
+                    spill_dictionary, separate_slicks=False
+                )
 
             logger.info("Modfying medslik_II.for")
             preproc.process_medslik_memmory_array()
@@ -341,18 +417,24 @@ class MedslikII:
         if separate_slicks == False:
             # copy METOCEAN files to MEDSLIK-II installation
             subprocess.run(
-                [f"cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/"],
+                [
+                    f"cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/"
+                ],
                 shell=True,
                 check=True,
             )
             subprocess.run(
-                [f"cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/"],
+                [
+                    f"cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/"
+                ],
                 shell=True,
                 check=True,
             )
             # copy bnc files
             subprocess.run(
-                [f"cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/"],
+                [
+                    f"cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/"
+                ],
                 shell=True,
                 check=True,
             )
@@ -365,18 +447,24 @@ class MedslikII:
                 check=True,
             )
             subprocess.run(
-                [f"cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/"],
+                [
+                    f"cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/"
+                ],
                 shell=True,
                 check=True,
             )
             subprocess.run(
-                [f"cp {simdir}{simname}/xp_files/config1.txt {model_dir}RUN/"],
+                [
+                    f"cp {simdir}{simname}/xp_files/config1.txt {model_dir}RUN/"
+                ],
                 shell=True,
                 check=True,
             )
             # Compile and start running
             subprocess.run(
-                [f"cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh"],
+                [
+                    f"cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh"
+                ],
                 shell=True,
                 check=True,
             )
@@ -385,16 +473,22 @@ class MedslikII:
             slicks = glob(f"{simdir}{simname}/xp_files/*/")
             for i in range(0, len(slicks)):
                 subprocess.run(
-                    [f"cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/"],
+                    [
+                        f"cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/"
+                    ],
                     shell=True,
                 )
                 subprocess.run(
-                    [f"cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/"],
+                    [
+                        f"cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/"
+                    ],
                     shell=True,
                 )
                 # copy bnc files
                 subprocess.run(
-                    [f"cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/"],
+                    [
+                        f"cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/"
+                    ],
                     shell=True,
                 )
                 # copy Extract and config files
@@ -405,7 +499,9 @@ class MedslikII:
                     shell=True,
                 )
                 subprocess.run(
-                    [f"cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/"],
+                    [
+                        f"cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/"
+                    ],
                     shell=True,
                 )
                 subprocess.run(
@@ -416,17 +512,25 @@ class MedslikII:
                 )
                 # Compile and start running
                 subprocess.run(
-                    [f"cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh"],
+                    [
+                        f"cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh"
+                    ],
                     shell=True,
                     check=True,
                 )
 
         # Send files to case dir and remove temp files
-        subprocess.run([f"cp -r {output_dir} {simdir}{simname}/out_files/"], shell=True)
         subprocess.run(
-            [f"rm -rf {simdir}{simname}/out_files/MET {simdir}{simname}/out_files/OCE"],
+            [f"cp -r {output_dir} {simdir}{simname}/out_files/"],
             shell=True,
         )
+        subprocess.run(
+            [
+                f"rm -rf {simdir}{simname}/out_files/MET {simdir}{simname}/out_files/OCE"
+            ],
+            shell=True,
+        )
+
 
 def main_run(config_path=None):
     # Logging first info
@@ -439,12 +543,14 @@ def main_run(config_path=None):
 
     main = MedslikII(config)
 
-    shutil.copy(config_path, os.path.join(main.xp_directory, "config.toml"))
+    shutil.copy(
+        config_path, os.path.join(main.xp_directory, "config.toml")
+    )
 
     # performing initial checking
     main.initial_checking()
 
-# Run preprocessing
+    # Run preprocessing
     logger.info("Starting pre processing ... ")
     MedslikII.run_preproc(
         main.config,
@@ -453,7 +559,7 @@ def main_run(config_path=None):
         main.lon_max,
         main.lat_min,
         main.lat_max,
-        main.n_spill_points
+        main.n_spill_points,
     )
     logger.info("End of pre processing ...")
 
@@ -461,10 +567,12 @@ def main_run(config_path=None):
     if main.config["run_options"]["run_model"]:
         logger.info("Running Medslik-II simulation")
         main.run_medslik_sim(
-            "WITOIL_iMagine/cases/", main.config["simulation"]["name"], separate_slicks=False
+            "WITOIL_iMagine/cases/",
+            main.config["simulation"]["name"],
+            separate_slicks=False,
         )
 
-    #performing postprocessing
+    # performing postprocessing
     if main.config["run_options"]["postprocessing"]:
         multiple_slick = main.config["simulation"]["multiple_slick"]
         PostProcessing.create_concentration_dataset(
@@ -476,10 +584,12 @@ def main_run(config_path=None):
             multiple_slick=multiple_slick,
         )
 
-    #plotting the results
+    # plotting the results
     if main.config["plot_options"]["plotting"]:
         mplot = MedslikIIPlot(main)
-        mplot.plot_matplotlib(main.lon_min,main.lon_max,main.lat_min,main.lat_max)
+        mplot.plot_matplotlib(
+            main.lon_min, main.lon_max, main.lat_min, main.lat_max
+        )
         try:
             mplot.plot_mass_balance()
         except:

@@ -1,3 +1,17 @@
+shapely
+pyproj
+xarray
+geopandas
+pandas
+mpld3
+netcdf4
+dask
+matplotlib
+scipy
+ipython
+cdsapi
+copernicusmarine
+compilers
 deepaas~=2.5.2
 aiohttp~=3.9.5
 yarl~=1.9.4

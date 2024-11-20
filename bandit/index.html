@@ -1,0 +1,1649 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+    Bandit Report
+</title>
+
+<style>
+
+html * {
+    font-family: "Arial", sans-serif;
+}
+
+pre {
+    font-family: "Monaco", monospace;
+}
+
+.bordered-box {
+    border: 1px solid black;
+    padding-top:.5em;
+    padding-bottom:.5em;
+    padding-left:1em;
+}
+
+.metrics-box {
+    font-size: 1.1em;
+    line-height: 130%;
+}
+
+.metrics-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    margin-bottom: .25em;
+}
+
+.issue-description {
+    font-size: 1.3em;
+    font-weight: 500;
+}
+
+.candidate-issues {
+    margin-left: 2em;
+    border-left: solid 1px; LightGray;
+    padding-left: 5%;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.issue-block {
+    border: 1px solid LightGray;
+    padding-left: .5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: .5em;
+}
+
+.issue-sev-high {
+    background-color: Pink;
+}
+
+.issue-sev-medium {
+    background-color: NavajoWhite;
+}
+
+.issue-sev-low {
+    background-color: LightCyan;
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="metrics">
+    <div class="metrics-box bordered-box">
+        <div class="metrics-title">
+            Metrics:<br>
+        </div>
+        Total lines of code: <span id="loc">3033</span><br>
+        Total lines skipped (#nosec): <span id="nosec">0</span>
+    </div>
+</div>
+
+
+
+
+<br>
+<div id="results">
+    
+<div id="issue-0">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>186<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+185	
+186	            subprocess.run(
+187	                [
+188	                    f&#x27;cp {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc {root_directory}/oce_files/&#x27;
+189	                ],
+190	               
+191	            )
+192	            subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-1">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>192<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+191	            )
+192	            subprocess.run(
+193	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+194	                
+195	            )
+196	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-2">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>219<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+218	
+219	            subprocess.run(
+220	                [
+221	                    f&#x27;cp {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc {root_directory}/met_files/&#x27;
+222	                ],
+223	               
+224	            )
+225	            subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-3">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>225<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+224	            )
+225	            subprocess.run(
+226	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+227	                
+228	            )
+229	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-4">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>347<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+346	        # removing old outputes just to be sure
+347	        subprocess.run([f&quot;rm -rf {output_dir}&quot;], shell=False )
+348	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-5">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>351<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+350	            # copy METOCEAN files to MEDSLIK-II installation
+351	            subprocess.run(
+352	                [f&quot;cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/&quot;],
+353	                
+354	                check=True,
+355	            )
+356	            subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-6">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>356<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+355	            )
+356	            subprocess.run(
+357	                [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+358	                
+359	                check=True,
+360	            )
+361	            # copy bnc files
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-7">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>362<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+361	            # copy bnc files
+362	            subprocess.run(
+363	                [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+364	                
+365	                check=True,
+366	            )
+367	            # copy Extract and config files
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-8">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>368<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+367	            # copy Extract and config files
+368	            subprocess.run(
+369	                [
+370	                    f&quot;cp {simdir}{simname}/xp_files/medslik_II.for {model_dir}RUN/MODEL_SRC/&quot;
+371	                ],
+372	                
+373	                check=True,
+374	            )
+375	            subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-9">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>375<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+374	            )
+375	            subprocess.run(
+376	                [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+377	                
+378	                check=True,
+379	            )
+380	            subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-10">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>380<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+379	            )
+380	            subprocess.run(
+381	                [f&quot;cp {simdir}{simname}/xp_files/config1.txt {model_dir}RUN/&quot;],
+382	                
+383	                check=True,
+384	            )
+385	            # Compile and start running
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-11">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>386<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+385	            # Compile and start running
+386	            subprocess.run(
+387	                [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+388	                
+389	                check=True,
+390	            )
+391	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-12">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>395<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+394	            for i in range(0, len(slicks)):
+395	                subprocess.run(
+396	                    [f&quot;cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/&quot;],
+397	                    
+398	                )
+399	                subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-13">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>399<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+398	                )
+399	                subprocess.run(
+400	                    [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+401	                    
+402	                )
+403	                # copy bnc files
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-14">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>404<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+403	                # copy bnc files
+404	                subprocess.run(
+405	                    [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+406	                    
+407	                )
+408	                # copy Extract and config files
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-15">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>409<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+408	                # copy Extract and config files
+409	                subprocess.run(
+410	                    [
+411	                        f&quot;cp {simdir}{simname}/xp_files/medslik_II.for {model_dir}RUN/MODEL_SRC/&quot;
+412	                    ],
+413	                    
+414	                )
+415	                subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-16">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>415<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+414	                )
+415	                subprocess.run(
+416	                    [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+417	                    
+418	                )
+419	                subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-17">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>419<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+418	                )
+419	                subprocess.run(
+420	                    [
+421	                        f&quot;cp {simdir}{simname}/xp_files/slick{i+1}/config1.txt {model_dir}RUN/&quot;
+422	                    ],
+423	                    
+424	                )
+425	                # Compile and start running
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-18">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>426<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+425	                # Compile and start running
+426	                subprocess.run(
+427	                    [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+428	                    
+429	                    check=True,
+430	                )
+431	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-19">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>433<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+432	        # Send files to case dir and remove temp files
+433	        subprocess.run([f&quot;cp -r {output_dir} {simdir}{simname}/out_files/&quot;], shell=False )
+434	        subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-20">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>434<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+433	        subprocess.run([f&quot;cp -r {output_dir} {simdir}{simname}/out_files/&quot;], shell=False )
+434	        subprocess.run(
+435	            [f&quot;rm -rf {simdir}{simname}/out_files/MET {simdir}{simname}/out_files/OCE&quot;],
+436	            
+437	        )
+438	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-21">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/main.py" target="_blank">WITOIL_iMagine/main.py</a><br>
+    <b>Line number: </b>508<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+507	            mplot.plot_mass_balance()
+508	        except:
+509	            pass
+510	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-22">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/download/download_copernicus_parser.py" target="_blank">WITOIL_iMagine/src/download/download_copernicus_parser.py</a><br>
+    <b>Line number: </b>77<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+76	        # remove the temporary files
+77	        subprocess.run([f&quot;rm -rf {output_path}temp.nc&quot;], shell=True)
+78	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-23">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/download/download_copernicus_parser.py" target="_blank">WITOIL_iMagine/src/download/download_copernicus_parser.py</a><br>
+    <b>Line number: </b>154<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+153	        subprocess.run(
+154	            [f&quot;rm -rf {output_path}/curr.nc {output_path}/temp.nc&quot;], shell=True
+155	        )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-24">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/download/download_era5_parser.py" target="_blank">WITOIL_iMagine/src/download/download_era5_parser.py</a><br>
+    <b>Line number: </b>82<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+81	    #remove the temporary files
+82	    subprocess.run([f&#x27;rm -rf {output_path}/temp*.nc&#x27;],shell=True)
+83	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-25">
+<div class="issue-block issue-sev-low">
+    <b>blacklist: </b> Using parse to parse untrusted XML data is known to be vulnerable to XML attacks. Replace parse with the equivalent defusedxml package, or make sure defusedxml.defuse_stdlib() is called.<br>
+    <b>Test ID:</b> B408<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/model/RUN/MODEL_SRC/ReadSatData_EMSA.py" target="_blank">WITOIL_iMagine/src/model/RUN/MODEL_SRC/ReadSatData_EMSA.py</a><br>
+    <b>Line number: </b>16<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_imports.html#b408-import-xml-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_imports.html#b408-import-xml-minidom</a><br>
+
+<div class="code">
+<pre>
+15	print (index)
+16	from xml.dom.minidom import parse
+17	dom1=parse(path_image)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-26">
+<div class="issue-block issue-sev-medium">
+    <b>blacklist: </b> Using xml.dom.minidom.parse to parse untrusted XML data is known to be vulnerable to XML attacks. Replace xml.dom.minidom.parse with its defusedxml equivalent function or make sure defusedxml.defuse_stdlib() is called<br>
+    <b>Test ID:</b> B318<br>
+    <b>Severity: </b>MEDIUM<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/20.html" target="_blank">CWE-20</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/model/RUN/MODEL_SRC/ReadSatData_EMSA.py" target="_blank">WITOIL_iMagine/src/model/RUN/MODEL_SRC/ReadSatData_EMSA.py</a><br>
+    <b>Line number: </b>17<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom" target="_blank">https://bandit.readthedocs.io/en/1.7.10/blacklists/blacklist_calls.html#b313-b320-xml-bad-minidom</a><br>
+
+<div class="code">
+<pre>
+16	from xml.dom.minidom import parse
+17	dom1=parse(path_image)
+18	#myuid=dom1.getElementsByTagName(&quot;prm:OilSpill&quot;)[0].getAttribute(&quot;uid&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-27">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/plot/plot_mdk3.py" target="_blank">WITOIL_iMagine/src/plot/plot_mdk3.py</a><br>
+    <b>Line number: </b>183<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+182	            ],
+183	            shell=True,
+184	        )
+185	
+186	    def plot_pyngl(
+187	        self,
+188	        plot_step: int = 1,
+189	    ) -&gt; None:
+190	        &quot;&quot;&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-28">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/plot/plot_mdk3.py" target="_blank">WITOIL_iMagine/src/plot/plot_mdk3.py</a><br>
+    <b>Line number: </b>211<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+210	            ],
+211	            shell=True,
+212	            check=True,
+213	        )
+214	
+215	
+216	if __name__ == &quot;__main__&quot;:
+217	    pass
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-29">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py" target="_blank">WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py</a><br>
+    <b>Line number: </b>118<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+117	            grid = grid.rename({&#x27;nav_lat&#x27;:&#x27;lat&#x27;,&#x27;nav_lon&#x27;:&#x27;lon&#x27;})
+118	        except:
+119	            pass
+120	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-30">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py" target="_blank">WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py</a><br>
+    <b>Line number: </b>155<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+154	            grid = grid.rename({&#x27;nav_lat&#x27;:&#x27;lat&#x27;,&#x27;nav_lon&#x27;:&#x27;lon&#x27;})
+155	        except:
+156	            pass
+157	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-31">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py" target="_blank">WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py</a><br>
+    <b>Line number: </b>222<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+221	
+222	        subprocess.run([f&#x27;cp WITOIL_iMagine/src/templates/medslik_II_template.for {med_for}&#x27;],shell=True)
+223	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-32">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py" target="_blank">WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py</a><br>
+    <b>Line number: </b>229<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+228	
+229	        subprocess.run([f&#x27;cp WITOIL_iMagine/src/templates/config2.txt {self.exp_folder}/xp_files/config2.txt&#x27;],shell=True)
+230	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-33">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py" target="_blank">WITOIL_iMagine/src/preprocessing/preprocessing_mdk3.py</a><br>
+    <b>Line number: </b>275<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+274	        subprocess.run(
+275	            [f&quot;cp WITOIL_iMagine/src/templates/config1_template_0.txt {config_file}&quot;], shell=True
+276	        )
+277	        # adding spill Name - Add slick number if separate slicks
+278	        if separate_slicks == False:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-34">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/utils/utils.py" target="_blank">WITOIL_iMagine/src/utils/utils.py</a><br>
+    <b>Line number: </b>419<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+418	        # Run the external Python script as a subprocess
+419	        subprocess.run([f&quot;{sys.executable}&quot;, script_name, gebco, grid, output_dir])
+420	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-35">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/utils/utils.py" target="_blank">WITOIL_iMagine/src/utils/utils.py</a><br>
+    <b>Line number: </b>425<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+424	        # Run the external Python script as a subprocess
+425	        subprocess.run([f&quot;{sys.executable}&quot;, script_name, gshhs, grid, output_dir])
+426	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-36">
+<div class="issue-block issue-sev-low">
+    <b>assert_used: </b> Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.<br>
+    <b>Test ID:</b> B101<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="WITOIL_iMagine/src/utils/utils.py" target="_blank">WITOIL_iMagine/src/utils/utils.py</a><br>
+    <b>Line number: </b>509<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b101_assert_used.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b101_assert_used.html</a><br>
+
+<div class="code">
+<pre>
+508	    result2 = Utils.compute_domain(480, 33, 41, 35, 10)
+509	    assert result2 == result
+510	    print(result)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-37">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>182<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+181	                ],
+182	                shell=True,
+183	            )
+184	            subprocess.run(
+185	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+186	                shell=True,
+187	            )
+188	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-38">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>186<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+185	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+186	                shell=True,
+187	            )
+188	
+189	        if config[&quot;download&quot;][&quot;download_wind&quot;]:
+190	            # ensuring .cdsapirc is created in the home directory
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-39">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>215<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+214	                ],
+215	                shell=True,
+216	            )
+217	            subprocess.run(
+218	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+219	                shell=True,
+220	            )
+221	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-40">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>219<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+218	                [f&#x27;rm {output_path}*{identifier}*{config[&quot;simulation&quot;][&quot;name&quot;]}*.nc&#x27;],
+219	                shell=True,
+220	            )
+221	
+222	    def run_preproc(config: dict, exp_folder: str, lon_min, lon_max, lat_min, lat_max, n_spill_points):
+223	        &quot;&quot;&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-41">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>339<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+338	        # removing old outputes just to be sure
+339	        subprocess.run([f&quot;rm -rf {output_dir}&quot;], shell=True)
+340	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-42">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>345<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+344	                [f&quot;cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/&quot;],
+345	                shell=True,
+346	                check=True,
+347	            )
+348	            subprocess.run(
+349	                [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+350	                shell=True,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-43">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>350<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+349	                [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+350	                shell=True,
+351	                check=True,
+352	            )
+353	            # copy bnc files
+354	            subprocess.run(
+355	                [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-44">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>356<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+355	                [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+356	                shell=True,
+357	                check=True,
+358	            )
+359	            # copy Extract and config files
+360	            subprocess.run(
+361	                [
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-45">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>364<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+363	                ],
+364	                shell=True,
+365	                check=True,
+366	            )
+367	            subprocess.run(
+368	                [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+369	                shell=True,
+370	                check=True,
+371	            )
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-46">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>369<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+368	                [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+369	                shell=True,
+370	                check=True,
+371	            )
+372	            subprocess.run(
+373	                [f&quot;cp {simdir}{simname}/xp_files/config1.txt {model_dir}RUN/&quot;],
+374	                shell=True,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-47">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>374<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+373	                [f&quot;cp {simdir}{simname}/xp_files/config1.txt {model_dir}RUN/&quot;],
+374	                shell=True,
+375	                check=True,
+376	            )
+377	            # Compile and start running
+378	            subprocess.run(
+379	                [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-48">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>380<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+379	                [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+380	                shell=True,
+381	                check=True,
+382	            )
+383	
+384	        else:
+385	            slicks = glob(f&quot;{simdir}{simname}/xp_files/*/&quot;)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-49">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>389<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+388	                    [f&quot;cp {simdir}{simname}/oce_files/*.mrc {model_dir}RUN/TEMP/OCE/&quot;],
+389	                    shell=True,
+390	                )
+391	                subprocess.run(
+392	                    [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+393	                    shell=True,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-50">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>393<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+392	                    [f&quot;cp {simdir}{simname}/met_files/*.eri {model_dir}RUN/TEMP/MET/&quot;],
+393	                    shell=True,
+394	                )
+395	                # copy bnc files
+396	                subprocess.run(
+397	                    [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-51">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>398<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+397	                    [f&quot;cp {simdir}{simname}/bnc_files/* {model_dir}DTM_INP/&quot;],
+398	                    shell=True,
+399	                )
+400	                # copy Extract and config files
+401	                subprocess.run(
+402	                    [
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-52">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>405<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+404	                    ],
+405	                    shell=True,
+406	                )
+407	                subprocess.run(
+408	                    [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+409	                    shell=True,
+410	                )
+411	                subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-53">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>409<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+408	                    [f&quot;cp {simdir}{simname}/xp_files/config2.txt {model_dir}RUN/&quot;],
+409	                    shell=True,
+410	                )
+411	                subprocess.run(
+412	                    [
+413	                        f&quot;cp {simdir}{simname}/xp_files/slick{i + 1}/config1.txt {model_dir}RUN/&quot;
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-54">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>415<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+414	                    ],
+415	                    shell=True,
+416	                )
+417	                # Compile and start running
+418	                subprocess.run(
+419	                    [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+420	                    shell=True,
+421	                    check=True,
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-55">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>420<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+419	                    [f&quot;cd {model_dir}RUN/; sh MODEL_SRC/compile.sh; ./RUN.sh&quot;],
+420	                    shell=True,
+421	                    check=True,
+422	                )
+423	
+424	        # Send files to case dir and remove temp files
+425	        subprocess.run([f&quot;cp -r {output_dir} {simdir}{simname}/out_files/&quot;], shell=True)
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-56">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>425<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+424	        # Send files to case dir and remove temp files
+425	        subprocess.run([f&quot;cp -r {output_dir} {simdir}{simname}/out_files/&quot;], shell=True)
+426	        subprocess.run(
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-57">
+<div class="issue-block issue-sev-high">
+    <b>subprocess_popen_with_shell_equals_true: </b> subprocess call with shell=True identified, security issue.<br>
+    <b>Test ID:</b> B602<br>
+    <b>Severity: </b>HIGH<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>428<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b602_subprocess_popen_with_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+427	            [f&quot;rm -rf {simdir}{simname}/out_files/MET {simdir}{simname}/out_files/OCE&quot;],
+428	            shell=True,
+429	        )
+430	
+431	def main_run(config_path=None):
+432	    # Logging first info
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-58">
+<div class="issue-block issue-sev-low">
+    <b>try_except_pass: </b> Try, Except, Pass detected.<br>
+    <b>Test ID:</b> B110<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/703.html" target="_blank">CWE-703</a><br>
+    <b>File: </b><a href="api/interface.py" target="_blank">api/interface.py</a><br>
+    <b>Line number: </b>485<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b110_try_except_pass.html</a><br>
+
+<div class="code">
+<pre>
+484	            mplot.plot_mass_balance()
+485	        except:
+486	            pass
+487	
+</pre>
+</div>
+
+
+</div>
+</div>
+
+<div id="issue-59">
+<div class="issue-block issue-sev-low">
+    <b>subprocess_without_shell_equals_true: </b> subprocess call - check for execution of untrusted input.<br>
+    <b>Test ID:</b> B603<br>
+    <b>Severity: </b>LOW<br>
+    <b>Confidence: </b>HIGH<br>
+    <b>CWE: </b><a href="https://cwe.mitre.org/data/definitions/78.html" target="_blank">CWE-78</a><br>
+    <b>File: </b><a href="api/utils.py" target="_blank">api/utils.py</a><br>
+    <b>Line number: </b>62<br>
+    <b>More info: </b><a href="https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html" target="_blank">https://bandit.readthedocs.io/en/1.7.10/plugins/b603_subprocess_without_shell_equals_true.html</a><br>
+
+<div class="code">
+<pre>
+61	    &quot;&quot;&quot;
+62	    with subprocess.Popen(
+63	        args=[&quot;rclone&quot;, &quot;copy&quot;, f&quot;{frompath}&quot;, f&quot;{topath}&quot;],
+64	        stdout=subprocess.PIPE,  # Capture stdout
+65	        stderr=subprocess.PIPE,  # Capture stderr
+66	        text=True,  # Return strings rather than bytes
+67	    ) as process:
+68	        try:
+</pre>
+</div>
+
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

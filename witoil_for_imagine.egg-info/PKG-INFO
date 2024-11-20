@@ -13,6 +13,20 @@ Classifier: Programming Language :: Python :: 3
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
+Requires-Dist: shapely
+Requires-Dist: pyproj
+Requires-Dist: xarray
+Requires-Dist: geopandas
+Requires-Dist: pandas
+Requires-Dist: mpld3
+Requires-Dist: netcdf4
+Requires-Dist: dask
+Requires-Dist: matplotlib
+Requires-Dist: scipy
+Requires-Dist: ipython
+Requires-Dist: cdsapi
+Requires-Dist: copernicusmarine
+Requires-Dist: compilers
 Requires-Dist: deepaas~=2.5.2
 Requires-Dist: aiohttp~=3.9.5
 Requires-Dist: yarl~=1.9.4
@@ -35,6 +49,9 @@ To launch it, first install the package then run [deepaas](https://github.com/ai
 ```bash
 git clone https://github.com/ai4os-hub/WITOIL-for-iMagine
 cd WITOIL-for-iMagine
+git submodule init
+git submodule update --remote --merge
+pip install -e ./path/to/submodule/dir
 pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```

@@ -17,6 +17,8 @@ tox.ini
 .sqa/config.yml
 .sqa/docker-compose.yml
 .sqa/dockerfile
+WITOIL_iMagine/main.py
+WITOIL_iMagine/requirements.txt
 api/__init__.py
 api/config.py
 api/interface.py

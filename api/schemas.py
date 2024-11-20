@@ -6,6 +6,7 @@ to add new inputs to your API.
 The module shows simple but efficient example schemas. However, you may
 need to modify them for your needs.
 """
+
 import marshmallow
 from webargs import ValidationError, fields, validate
 
@@ -44,34 +45,35 @@ class PredArgsSchema(marshmallow.Schema):
         # pylint: disable=too-few-public-methods
         ordered = True
 
-#    model_name = ModelName(
-#        metadata={
-#            "description": "String/Path identification for models.",
-#        },
-#        required=True,
-#    )
-#
-#    input_file = fields.Field(
-#        metadata={
-#            "description": "File with np.arrays for predictions.",
-#            "type": "file",
-#            "location": "form",
-#        },
-#        required=True,
-#    )
-#        
+    #    model_name = ModelName(
+    #        metadata={
+    #            "description": "String/Path identification for models.",
+    #        },
+    #        required=True,
+    #    )
+    #
+    #    input_file = fields.Field(
+    #        metadata={
+    #            "description": "File with np.arrays for predictions.",
+    #            "type": "file",
+    #            "location": "form",
+    #        },
+    #        required=True,
+    #    )
+    #
     name = fields.String(
         metadata={
-            "description": "Name of the simulation. If None or "", default name is used.",
+            "description": "Name of the simulation. If None or "
+            ", default name is used.",
         },
         load_default="my_experiment",
     )
-        
+
     start_datetime = fields.DateTime(
         metadata={
             "description": "Start date of the simulation in the format of YYYY-MM-DDTHH:MM:SS as this example 2021-08-21T03:43:00.",
         },
-        #load_default="2021-08-21T03:43:00",
+        # load_default="2021-08-21T03:43:00",
     )
     sim_length = fields.Float(
         metadata={
@@ -79,7 +81,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=24.0,
     )
-    
+
     spill_lat = fields.List(
         cls_or_instance=fields.Float,
         validate=validate.Length(min=1, max=5),
@@ -88,7 +90,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[35.25],
     )
-    
+
     spill_lon = fields.List(
         cls_or_instance=fields.Float,
         validate=validate.Length(min=1, max=5),
@@ -97,7 +99,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[35.90],
     )
-    
+
     spill_duration = fields.List(
         cls_or_instance=fields.Float,
         validate=validate.Length(min=1, max=5),
@@ -106,7 +108,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[0.0],
     )
-    
+
     spill_rate = fields.List(
         cls_or_instance=fields.Float,
         validate=validate.Length(min=1, max=5),
@@ -124,10 +126,10 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[0.0],
     )
-    
+
     oil = fields.List(
         cls_or_instance=fields.Float,
-        validate=validate.Length(min=1,max=5),
+        validate=validate.Length(min=1, max=5),
         metadata={
             "description": "List of either API (number) of the oil or names (string). Names must be exact.",
         },
@@ -160,7 +162,7 @@ class PredArgsSchema(marshmallow.Schema):
         validate=validate.Length(min=1),
         metadata={
             "description": "User for downloading COPERNICUS data.",
-        }
+        },
     )
 
     copernicus_password = fields.String(
@@ -170,7 +172,7 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "Password for downloading COPERNICUS data.",
             "format": "password",
-        }
+        },
     )
 
     cds_token = fields.String(
@@ -180,7 +182,7 @@ class PredArgsSchema(marshmallow.Schema):
         metadata={
             "description": "Token for downloading ERA5 data.",
             "format": "password",
-        }
+        },
     )
 
     set_domain = fields.Boolean(
@@ -197,7 +199,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[31, 38],
     )
-    
+
     lon = fields.List(
         cls_or_instance=fields.Float,
         metadata={
@@ -214,7 +216,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[0.75],
     )
-    
+
     plot_lon = fields.List(
         cls_or_instance=fields.Float,
         metadata={
@@ -222,7 +224,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[35.5, 36.5],
     )
-    
+
     plot_lat = fields.List(
         cls_or_instance=fields.Float,
         metadata={
@@ -230,7 +232,7 @@ class PredArgsSchema(marshmallow.Schema):
         },
         load_default=[35, 36],
     )
-        
+
     accept = fields.String(
         metadata={
             "description": "Return format for method response.",

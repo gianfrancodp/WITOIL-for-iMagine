@@ -6,6 +6,7 @@ docs [1] and at a canonical exemplar module [2].
 [1]: https://docs.ai4eosc.eu/
 [2]: https://github.com/ai4os-hub/demo-advanced
 """
+
 import logging
 
 import toml
@@ -38,13 +39,17 @@ def get_metadata():
             "description": config.API_METADATA.get("summary"),
             "license": config.API_METADATA.get("license"),
             "version": config.API_METADATA.get("version"),
-            "datasets": utils.ls_files(config.DATA_PATH, '[A-Za-z0-9]*'),
+            "datasets": utils.ls_files(
+                config.DATA_PATH, "[A-Za-z0-9]*"
+            ),
             "models": utils.ls_dirs(config.MODELS_PATH),
         }
         logger.debug("Package model metadata: %s", metadata)
         return metadata
     except Exception as err:
-        logger.error("Error collecting metadata: %s", err, exc_info=True)
+        logger.error(
+            "Error collecting metadata: %s", err, exc_info=True
+        )
         raise  # Reraise the exception after log
 
 
@@ -70,44 +75,63 @@ def predict(**options):
         # Load config.toml and modify the user inputs
         tdata = toml.load("WITOIL_iMagine/config.toml")
 
-        tdata['simulation']['name'] = options['name']
-        tdata['simulation']['start_datetime'] = options['start_datetime']
-        tdata['simulation']['sim_length'] = options['sim_length']
-        tdata['simulation']['spill_lat'] = options['spill_lat']
-        tdata['simulation']['spill_lon'] = options['spill_lon']
-        tdata['simulation']['spill_duration'] = options['spill_duration']
-        tdata['simulation']['spill_rate'] = options['spill_rate']
-        tdata['simulation']['slick_age'] = options['slick_age']
-        tdata['simulation']['oil'] = options['oil']
-        tdata['simulation']['area_spill'] = options['area_spill']
-        tdata['simulation']['area_vertex'] = options['area_vertex']
-        tdata['simulation']['multiple_slick'] = options['multiple_slick']
-        tdata['download']['copernicus_user'] = options['copernicus_user']
-        tdata['download']['copernicus_password'] = options['copernicus_password']
-        tdata['download']['cds_token'] = options['cds_token']
-        tdata['input_files']['set_domain'] = options['set_domain']
-        tdata['input_files']['lat'] = options['lat']
-        tdata['input_files']['lon'] = options['lon']
-        tdata['input_files']['delta'] = options['delta']
-        tdata['plot_options']['plot_lon'] = options['plot_lon']
-        tdata['plot_options']['plot_lat'] = options['plot_lat']
+        tdata["simulation"]["name"] = options["name"]
+        tdata["simulation"]["start_datetime"] = options[
+            "start_datetime"
+        ]
+        tdata["simulation"]["sim_length"] = options["sim_length"]
+        tdata["simulation"]["spill_lat"] = options["spill_lat"]
+        tdata["simulation"]["spill_lon"] = options["spill_lon"]
+        tdata["simulation"]["spill_duration"] = options[
+            "spill_duration"
+        ]
+        tdata["simulation"]["spill_rate"] = options["spill_rate"]
+        tdata["simulation"]["slick_age"] = options["slick_age"]
+        tdata["simulation"]["oil"] = options["oil"]
+        tdata["simulation"]["area_spill"] = options["area_spill"]
+        tdata["simulation"]["area_vertex"] = options["area_vertex"]
+        tdata["simulation"]["multiple_slick"] = options[
+            "multiple_slick"
+        ]
+        tdata["download"]["copernicus_user"] = options[
+            "copernicus_user"
+        ]
+        tdata["download"]["copernicus_password"] = options[
+            "copernicus_password"
+        ]
+        tdata["download"]["cds_token"] = options["cds_token"]
+        tdata["input_files"]["set_domain"] = options["set_domain"]
+        tdata["input_files"]["lat"] = options["lat"]
+        tdata["input_files"]["lon"] = options["lon"]
+        tdata["input_files"]["delta"] = options["delta"]
+        tdata["plot_options"]["plot_lon"] = options["plot_lon"]
+        tdata["plot_options"]["plot_lat"] = options["plot_lat"]
 
-        conf = open("WITOIL_iMagine/config.toml",'w')
+        conf = open("WITOIL_iMagine/config.toml", "w")
         toml.dump(tdata, conf)
         conf.close()
 
         witoil.main_run("WITOIL_iMagine/config.toml")
-        result = "WITOIL_iMagine/cases/"+options['name']+"/out_files/figures/"
+        result = (
+            "WITOIL_iMagine/cases/"
+            + options["name"]
+            + "/out_files/figures/"
+        )
 
         logger.debug("Predict result: %s", result)
 
         logger.info(
-                "Returning content_type for: %s", options["accept"]
+            "Returning content_type for: %s", options["accept"]
+        )
+
+        return responses.png_response(result, **options)
+
+    except Exception as err:
+        (
+            logger.error(
+                "Error calculating predictions: %s",
+                err,
+                exc_info=True,
             )
-
-        return responses.png_response(result,**options)
-    
-    except Exception as err:(
-        logger.error("Error calculating predictions: %s", err, exc_info=True))
+        )
     raise  # Reraise the exception after log
-

@@ -11,6 +11,9 @@ To launch it, first install the package then run [deepaas](https://github.com/ai
 ```bash
 git clone https://github.com/ai4os-hub/WITOIL-for-iMagine
 cd WITOIL-for-iMagine
+git submodule init
+git submodule update --remote --merge
+pip install -e ./path/to/submodule/dir
 pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```

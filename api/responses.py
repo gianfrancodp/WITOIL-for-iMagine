@@ -5,10 +5,12 @@ method into the desired format.
 The module shows simple but efficient example functions. However, you may
 need to modify them for your needs.
 """
+
 import io
 import logging
 import cv2
 from io import BytesIO
+
 # from fpdf import FPDF
 import tempfile
 import os
@@ -99,7 +101,7 @@ def png_response(results, **options):
 
     check = 0
     last_img = None
-    for file_name in glob.glob(results+'/surf*'):
+    for file_name in glob.glob(results + "/surf*"):
         fts = os.path.getmtime(file_name)
         if fts > check:
             check = fts
@@ -107,10 +109,10 @@ def png_response(results, **options):
     print(last_img)
 
     try:
-        # Passing path of image as parameter 
-        img = cv2.imread(last_img) 
+        # Passing path of image as parameter
+        img = cv2.imread(last_img)
 
-        success, buffer = cv2.imencode('.png',img)
+        success, buffer = cv2.imencode(".png", img)
         if not success:
             return "Error encoding image", 500
 
@@ -121,6 +123,7 @@ def png_response(results, **options):
     except Exception as err:  # TODO: Fix to specific exception
         logger.warning("Error converting result to png: %s", err)
         raise RuntimeError("Unsupported response type") from err
+
 
 def create_video_in_buffer(frame_arrays, output_format="mp4"):
     height, width, _ = frame_arrays[0].shape
@@ -144,6 +147,7 @@ def create_video_in_buffer(frame_arrays, output_format="mp4"):
     # Open the renamed file for reading
     message = open(final_filename, "rb")
     return message
+
 
 def mp4_response(results, **options):
     """Converts the prediction or training results into
@@ -176,9 +180,10 @@ def mp4_response(results, **options):
     message = create_video_in_buffer(new_results)
     return message
 
+
 content_types = {
-#    "application/json": json_response,
-#    "application/pdf": pdf_response,
+    #    "application/json": json_response,
+    #    "application/pdf": pdf_response,
     "image/png": png_response,
     "video/mp4": mp4_response,
 }

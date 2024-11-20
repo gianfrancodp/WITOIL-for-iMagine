@@ -6,6 +6,7 @@ your API.
 The module shows simple but efficient example utilities. However, you may
 need to modify them for your needs.
 """
+
 import logging
 import subprocess
 import sys
@@ -70,11 +71,15 @@ def copy_remote(frompath, topath, timeout=600):
             if errs:
                 raise RuntimeError(errs)
         except TimeoutExpired:
-            logger.error("Timeout when copying from/to remote directory.")
+            logger.error(
+                "Timeout when copying from/to remote directory."
+            )
             process.kill()
             outs, errs = process.communicate()
         except Exception as exc:  # pylint: disable=broad-except
-            logger.error("Error copying from/to remote directory\n %s", exc)
+            logger.error(
+                "Error copying from/to remote directory\n %s", exc
+            )
             process.kill()
             outs, errs = process.communicate()
     return outs, errs
