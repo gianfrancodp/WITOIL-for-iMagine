@@ -10,6 +10,7 @@ The Medslik-II oil spill model is a community-driven, freely available framework
 to predict the movement and weathering of oil slicks using a Lagrangian representation.
 It simulates the dispersion of oil spills based on real-world environmental conditions.
 
+## Integrating the model with DEEPaaS
 In this repository, we have integrated a DeepaaS API into the existing Medslik-II oil spill model. To launch it, first install the package then run [deepaas](https://github.com/ai4os/DEEPaaS):
 
 > ![warning](https://img.shields.io/badge/Warning-red.svg) **Warning**: If you are using a virtual environment, make sure you are working with the last version of pip before installing the package. Use `pip install --upgrade pip` to upgrade pip.
@@ -31,8 +32,7 @@ To use WITOIL for iMagine, users must first register and obtain essential datase
        Registration is available [here](https://data.marine.copernicus.eu/register?redirect=%2Fproducts).Once the account is created, 
        the user should store their username and password for future use.
 
-  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/CMEMS.png'/>
-
+  <img src="https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/CMEMS.png" alt="CMEMS Image" width="400"/>
 
   2. **European Centre for Medium-Range Weather Forecasts (ECMWF)**:
      - Users must register and obtain a token to access ERA5 reanalysis data. Registration 
@@ -41,12 +41,13 @@ To use WITOIL for iMagine, users must first register and obtain essential datase
        under the "Personal Access Token" section. The last step, which is somewhat hidden, is to accept 
        the terms of use for the dataset. 
   
-  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/access_token_ERA5.png'/>
+ 
+  <img src="https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/access_token_ERA5.png" alt="CMEMS Image" width="400"/>
      
-     - The user needs to navigate to the [ERA5 single layer page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download),
+  - The user needs to navigate to the [ERA5 single layer page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download),
        scroll to the bottom of the page, and accept the terms of usage when they appear.
   
-  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/Terms_of_usage_ERA5.png'/>
+    <img src="https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/Terms_of_usage_ERA5.png" alt="CMEMS Image" width="400"/>
 ## RUNNING WITOIL FOR iMAGINE
   Once registrations are complete, users must provide their credentials, spill details, and 
   environmental parameters to run the model. After entering the necessary information, users 
@@ -55,16 +56,8 @@ To use WITOIL for iMagine, users must first register and obtain essential datase
   process facilitates informed decision-making for mitigating the impact of oil 
   spills.
   
-  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/oil_concentration_algeria.gif'/>
-
-  **References**:
-  1. De Dominicis M., N. Pinardi, G. Zodiatis, R. Lardner. [MEDSLIK-II, a Lagrangian marine
-     surface oil spill model for short-term forecasting - Part 1: Theory](https://doi.org/10.5194/gmd-6-1851-2013). 
-     Geosci. Model Dev., 6, 1851-1869, 2013.
-  2. De Dominicis M., N. Pinardi, G. Zodiatis, R. Archetti [MEDSLIK-II, a Lagrangian marine 
-     surface oil spill model for short-term forecasting - Part 2: Numerical simulations and 
-     validations](https://doi.org/10.5194/gmd-6-1871-2013). Geosci. Model Dev., 6, 1851-1869, 
-     2013.
+  <img src="https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/oil_concentration_algeria.gif" alt="CMEMS Image" width="400"/>
+ 
 ## Project structure
 
 ```
@@ -121,77 +114,16 @@ To use WITOIL for iMagine, users must first register and obtain essential datase
 │
 └── tox.ini                 <- tox file with settings for running tox; see tox.testrun.org
 ```
+ 
 
-## Integrating your model with DEEPaaS
+## References
+  1. De Dominicis M., N. Pinardi, G. Zodiatis, R. Lardner. [MEDSLIK-II, a Lagrangian marine
+     surface oil spill model for short-term forecasting - Part 1: Theory](https://doi.org/10.5194/gmd-6-1851-2013). 
+     Geosci. Model Dev., 6, 1851-1869, 2013.
+  2. De Dominicis M., N. Pinardi, G. Zodiatis, R. Archetti [MEDSLIK-II, a Lagrangian marine 
+     surface oil spill model for short-term forecasting - Part 2: Numerical simulations and 
+     validations](https://doi.org/10.5194/gmd-6-1871-2013). Geosci. Model Dev., 6, 1851-1869, 2013.  
 
-After executing the cookiecutter template, you will have a folder structure
-ready to be integrated with DEEPaaS. Then you can decide between starting the
-project from scratch or integrating your existing model with DEEPaaS.
 
-The folder `witoil_for_imagine` is designed to contain the source
-code of your model. You can add your model files there or replace it by another
-repository by using [git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
-The only requirement is that the folder `witoil_for_imagine` contains
-an `__init__.py` file conserving the already defined methods. You can edit the
-template functions already defined inside or import your own functions from
-another file. See the [README.md](./witoil_for_imagine/README.md)
-in the `witoil_for_imagine` folder for more information.
 
-Those methods, are used by the subpackage `api` to define the API interface.
-See the project structure section for more information about the `api` folder.
-You are allowed to customize your model API and CLI arguments and responses by
-editing `api.schemas` and`api.responses` modules. See documentation inside those
-files for more information.
 
-Sometimes you only need to add an interface to an existing model. In case that
-the model is already published in a public repository, you can add it as a
-requirement into the `requirements.txt` file. If the model is not published
-yet, you can add it as a submodule inside or outside the project and install
-it by using `pip install -e <path-to-model>`. In both cases, you will need to
-interface the model with the `api` subpackage with the required methods. See
-the [README.md](./witoil_for_imagine/README.md)
-
-## Documentation
-
-TODO: Add instructions on how to build documentation
-
-## Testing
-
-Testing process is automated by tox library. You can check the environments
-configured to be tested by running `tox --listenvs`. If you are missing one
-of the python environments configured to be tested (e.g. py310, py39) and
-you are using `conda` for managing your virtual environments, consider using
-`tox-conda` to automatically manage all python installation on your testing
-virtual environment.
-
-Tests are implemented following [pytest](https://docs.pytest.org) framework.
-Fixtures and parametrization are placed inside `conftest.py` files meanwhile
-assertion tests are located on `test_*.py` files. As developer, you can edit
-any of the existing files or add new ones as needed. However, the project is
-designed so you only have to edit the files inside:
-
-    - tests/data: To add your testing data (small datasets, etc.).
-    - tests/models: To add your testing models (small models, etc.).
-    - tests/test_metadata: To fix and test your metadata requirements.
-    - tests/test_predictions: To fix and test your predictions requirements.
-    - tests/test_training: To fix and test your training requirements.
-
-The folder `tests/data` should contain minimalistic but representative
-datasets to be used for testing. In a similar way, `tests/models` should
-contain simple models for testing that can fit on your code repository. This
-is important to avoid large files on your repository and to speed up the
-testing process.
-
-Running the tests with tox:
-
-```bash
-$ pip install -r requirements-dev.txt
-$ tox
-```
-
-Running the tests with pytest:
-
-```bash
-$ pip install -r requirements-test.txt
-$ python -m pytest --numprocesses=auto --dist=loadscope tests
-```
