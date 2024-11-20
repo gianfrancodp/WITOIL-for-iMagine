@@ -1,2 +1,0 @@
-[deepaas.v2.model]
-witoil_for_imagine = witoil_for_imagine.api
