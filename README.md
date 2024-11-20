@@ -2,9 +2,15 @@
 
 [![Build Status](https://jenkins.services.ai4os.eu/buildStatus/icon?job=AI4OS-hub/WITOIL-for-iMagine/main)](https://jenkins.services.ai4os.eu/job/AI4OS-hub/job/WITOIL-for-iMagine/job/main)
 
-Medslik-II Oil fate lagrangian model
+WITOIL for iMagine is an advanced application utilizing the DEEPaaS API to predict the
+transport and transformation of actual or hypothetical oil spills in the ocean, powered 
+by the **Medslik-II** model.
 
-To launch it, first install the package then run [deepaas](https://github.com/ai4os/DEEPaaS):
+The Medslik-II oil spill model is a community-driven, freely available framework designed
+to predict the movement and weathering of oil slicks using a Lagrangian representation.
+It simulates the dispersion of oil spills based on real-world environmental conditions.
+
+In this repository, we have integrated a DeepaaS API into the existing Medslik-II oil spill model. To launch it, first install the package then run [deepaas](https://github.com/ai4os/DEEPaaS):
 
 > ![warning](https://img.shields.io/badge/Warning-red.svg) **Warning**: If you are using a virtual environment, make sure you are working with the last version of pip before installing the package. Use `pip install --upgrade pip` to upgrade pip.
 
@@ -17,7 +23,48 @@ pip install -e ./path/to/submodule/dir
 pip install -e .
 deepaas-run --listen-ip 0.0.0.0
 ```
+## How To Use 
+To use WITOIL for iMagine, users must first register and obtain essential datasets from the 
+  following sources:
+  1. **Copernicus Marine Environment Monitoring Service (CMEMS)**:
+    - Users must create an account to access oceanographic data required for simulations.
+       Registration is available [here](https://data.marine.copernicus.eu/register?redirect=%2Fproducts).Once the account is created, 
+       the user should store their username and password for future use.
 
+  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/CMEMS.png'/>
+
+
+  2. **European Centre for Medium-Range Weather Forecasts (ECMWF)**:
+     - Users must register and obtain a token to access ERA5 reanalysis data. Registration 
+       can be completed [here](https://accounts.ecmwf.int/auth/realms/ecmwf/protocol/openid-connect/auth?client_id=cds&scope=openid%20email&response_type=code&redirect_uri=https%3A%2F%2Fcds.climate.copernicus.eu%2Fapi%2Fauth%2Fcallback%2Fkeycloak&state=LnmYV9xerVidknPojo3UgHrUPSxQzlbc6x8GMlNWQis&code_challenge=KvF-CRFr9d7MJM4TMUq3sQOvBQZYIie4bB6dLJsSbtQ&code_challenge_method=S256).
+     - Users must retrieve their token from their profile [here](https://cds.climate.copernicus.eu/profile) 
+       under the "Personal Access Token" section. The last step, which is somewhat hidden, is to accept 
+       the terms of use for the dataset. 
+  
+  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/access_token_ERA5.png'/>
+     
+     - The user needs to navigate to the [ERA5 single layer page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download),
+       scroll to the bottom of the page, and accept the terms of usage when they appear.
+  
+  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/Terms_of_usage_ERA5.png'/>
+## RUNNING WITOIL FOR iMAGINE
+  Once registrations are complete, users must provide their credentials, spill details, and 
+  environmental parameters to run the model. After entering the necessary information, users 
+  can execute the simulation by clicking "Run". The outputs include visualizations of oil 
+  dispersion, temporal oil concentrations, and current/wind direction vectors.This 
+  process facilitates informed decision-making for mitigating the impact of oil 
+  spills.
+  
+  <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/oil_concentration_algeria.gif'/>
+
+  **References**:
+  1. De Dominicis M., N. Pinardi, G. Zodiatis, R. Lardner. [MEDSLIK-II, a Lagrangian marine
+     surface oil spill model for short-term forecasting - Part 1: Theory](https://doi.org/10.5194/gmd-6-1851-2013). 
+     Geosci. Model Dev., 6, 1851-1869, 2013.
+  2. De Dominicis M., N. Pinardi, G. Zodiatis, R. Archetti [MEDSLIK-II, a Lagrangian marine 
+     surface oil spill model for short-term forecasting - Part 2: Numerical simulations and 
+     validations](https://doi.org/10.5194/gmd-6-1871-2013). Geosci. Model Dev., 6, 1851-1869, 
+     2013.
 ## Project structure
 
 ```
