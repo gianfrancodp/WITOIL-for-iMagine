@@ -15,7 +15,7 @@ description: |-
     - Atmospheric wind data provided by the European Centre for Medium-Range Weather Forecasts
       (ECMWF) with 0.125° horizontal resolution and 6-hour temporal intervals.
     - Ocean current data sourced from the Copernicus Marine Environment Monitoring Service
-      (CMEMS) with horizontal resolutions of 1/16° (~6 km) or 1/8° (~12 km), depending on 
+      (CMEMS) with horizontal resolutions of 1/16° (approximately 6 km) or 1/8° (approximately 12 km), depending on 
       the region.
   - **Interactive Inputs**:
     - Users specify details such as spill location, spill characteristics, and environmental
@@ -28,7 +28,7 @@ description: |-
   To use WITOIL for iMagine, users must first register and obtain essential datasets from the 
   following sources:
   1. **Copernicus Marine Environment Monitoring Service (CMEMS)**:
-     - Users must create an account to access oceanographic data required for simulations.
+    - Users must create an account to access oceanographic data required for simulations.
        Registration is available [here](https://data.marine.copernicus.eu/register?redirect=%2Fproducts).Once the account is created, 
        the user should store their username and password for future use.
 
@@ -44,8 +44,8 @@ description: |-
   
   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/access_token_ERA5.png'/>
      
-     - The user needs to navigate to the [ERA5 single layer page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download).
-       The user needs to scroll down to the bottom of the page until the terms of usage appear, and then they should accept them.
+     - The user needs to navigate to the [ERA5 single layer page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-pressure-levels?tab=download),
+       scroll to the bottom of the page, and accept the terms of usage when they appear.
   
   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/Terms_of_usage_ERA5.png'/>
 
@@ -54,9 +54,9 @@ description: |-
   Once registrations are complete, users must provide their credentials, spill details, and 
   environmental parameters to run the model. After entering the necessary information, users 
   can execute the simulation by clicking "Run". The outputs include visualizations of oil 
-  dispersion, temporal oil concentrations, and current/wind direction vectors.
-
-  This process facilitates informed decision-making for mitigating the impact of oil spills.
+  dispersion, temporal oil concentrations, and current/wind direction vectors.This 
+  process facilitates informed decision-making for mitigating the impact of oil 
+  spills.
   
   <img class='fit', src='https://raw.githubusercontent.com/ai4os-hub/WITOIL-for-iMagine/main/data/tutorial_images/oil_concentration_algeria.gif'/>
 
