@@ -63,7 +63,7 @@ ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
 RUN git clone -b $branch --depth 1 https://github.com/santibravocmcc/witoil-for-imagine && \
-    cd WITOIL-for-iMagine && \
+    cd witoil-for-imagine && \
     git submodule update --init --recursive --remote && \
     pip3 install --no-cache-dir -e .
 
