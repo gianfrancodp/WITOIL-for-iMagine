@@ -62,8 +62,8 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
-RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
-    cd witoil-for-imagine && \
+RUN git clone -b $branch --depth 1 https://github.com/santibravocmcc/witoil-for-imagine && \
+    cd WITOIL-for-iMagine && \
     git submodule update --init --recursive --remote && \
     pip3 install --no-cache-dir -e .
 
