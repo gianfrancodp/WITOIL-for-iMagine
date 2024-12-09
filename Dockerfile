@@ -20,7 +20,7 @@ LABEL version='0.0.1'
 # Medslik-II Oil fate lagrangian model
 
 # What user branch to clone [!]
-ARG branch=no-shell-up
+ARG branch=main
 
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
