@@ -20,7 +20,7 @@ LABEL version='0.0.1'
 # Medslik-II Oil fate lagrangian model
 
 # What user branch to clone [!]
-ARG branch=no-shell
+ARG branch=no-shell-up
 
 # Install Ubuntu packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -62,7 +62,7 @@ RUN curl -O https://downloads.rclone.org/rclone-current-linux-amd64.deb && \
 ENV RCLONE_CONFIG=/srv/.rclone/rclone.conf
 
 # Install user app
-RUN git clone -b $branch --depth 1 https://github.com/santibravocmcc/witoil-for-imagine && \
+RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagine && \
     cd witoil-for-imagine && \
     git submodule update --init --recursive --remote && \
     pip3 install --no-cache-dir -e .
