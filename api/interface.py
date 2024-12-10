@@ -433,8 +433,8 @@ class MedslikII:
             # Compile and start running (replacing `cd` with `cwd`)
             compile_script = "MODEL_SRC/compile.sh"
             run_script = "RUN.sh"
-            subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN"))
-            subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN"))
+            subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
+            subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
 
         else:
             # Handle separate slicks
@@ -457,8 +457,8 @@ class MedslikII:
                 # Compile and start running
                 compile_script = "MODEL_SRC/compile.sh"
                 run_script = "RUN.sh"
-                subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN"))
-                subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN"))
+                subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
+                subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
 
         # Copy output files (replacing `cp -r`)
         output_dest = os.path.join(simdir, simname, "out_files")
