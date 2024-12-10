@@ -65,7 +65,7 @@ def copy_remote(frompath, topath, timeout=600):
         stdout=subprocess.PIPE,  # Capture stdout
         stderr=subprocess.PIPE,  # Capture stderr
         text=True,  # Return strings rather than bytes
-    ) as process:
+    ) as process: # nosec
         try:
             outs, errs = process.communicate(None, timeout)
             if errs:

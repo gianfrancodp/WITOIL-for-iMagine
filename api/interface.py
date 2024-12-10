@@ -527,6 +527,11 @@ def main_run(config_path=None):
         )
 
     # plotting the results
+    # if main.config["plot_options"]["plotting"]:
+    #     mplot = MedslikIIPlot(main)
+    #     mplot.plot_matplotlib(main.lon_min, main.lon_max, main.lat_min, main.lat_max)
+    #     mplot.plot_mass_balance()
+
     if main.config["plot_options"]["plotting"]:
         mplot = MedslikIIPlot(main)
         mplot.plot_matplotlib(
