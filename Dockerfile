@@ -1,4 +1,4 @@
-## Dockerfile may have following Arguments:
+# Dockerfile may have following Arguments:
 # tag - tag for the Base image, (e.g. 2.9.1 for tensorflow)
 # branch - user repository branch to clone, i.e. test (default: main)
 #
