@@ -70,7 +70,7 @@ RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagi
 # (force) remove WITOIL_iMagine/data/{gebco|gshhs} directories
 # and link to the Gebco Bathymetry and GSHHS Coastline directories
 # already placed in the "base" image (/data/{gebco|gshhs})
-RUN cd /srv/witoil-for-imagine/WITOIL_iMagine/data/ && \
+RUN cd /srv/witoil-for-imagine/witoil-for-imagine/WITOIL_iMagine/data/ && \
     rm -rf gebco && rm -rf gshhs && \
     ln -s /data/gebco gebco && \
     ln -s /data/gshhs gshhs
