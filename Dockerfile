@@ -38,7 +38,7 @@ RUN python3 --version && \
 ENV LANG=C.UTF-8
 
 # Set the working directory
-WORKDIR /srv
+WORKDIR /srv/witoil-for-imagine
 
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER=yes
