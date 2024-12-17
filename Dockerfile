@@ -100,4 +100,4 @@ RUN chown -R appuser:appuser /srv
 
 # Launch deepaas in /srv/witoil-for-imagine
 # WORKDIR /srv might be needed for jupyter or vscode
-CMD ["sh","-c","cd /srv/witoil-for-imagine/witoil-for-imagine && deep-start"]
+CMD ["sh", "-c", "cd $(find /srv/witoil-for-imagine -type d -name 'witoil-for-imagine') && deep-start"]
