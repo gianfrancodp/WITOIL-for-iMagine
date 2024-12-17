@@ -38,7 +38,7 @@ RUN python3 --version && \
 ENV LANG=C.UTF-8
 
 # Set the working directory
-WORKDIR /srv/witoil-for-imagine
+WORKDIR /srv
 
 # Disable FLAAT authentication by default
 ENV DISABLE_AUTHENTICATION_AND_ASSUME_AUTHENTICATED_USER=yes
@@ -70,13 +70,17 @@ RUN git clone -b $branch --depth 1 https://github.com/ai4os-hub/witoil-for-imagi
 # (force) remove WITOIL_iMagine/data/{gebco|gshhs} directories
 # and link to the Gebco Bathymetry and GSHHS Coastline directories
 # already placed in the "base" image (/data/{gebco|gshhs})
-RUN cd /srv/witoil-for-imagine/witoil-for-imagine/WITOIL_iMagine/data/ && \
+RUN cd /srv/witoil-for-imagine/WITOIL_iMagine/data/ && \
     rm -rf gebco && rm -rf gshhs && \
     ln -s /data/gebco gebco && \
     ln -s /data/gshhs gshhs
 
 # Open ports: DEEPaaS (5000), Monitoring (6006), Jupyter (8888)
 EXPOSE 5000 6006 8888
+
+# Add the entrypoint script
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
@@ -100,4 +104,7 @@ RUN chown -R appuser:appuser /srv
 
 # Launch deepaas in /srv/witoil-for-imagine
 # WORKDIR /srv might be needed for jupyter or vscode
-CMD ["sh", "-c", "cd /srv/witoil-for-imagine/witoil-for-imagine && exec deep-start"]
+# CMD ["sh","-c","cd /srv/witoil-for-imagine && deep-start"]
+
+# Set the entrypoint
+ENTRYPOINT ["entrypoint.sh"]
