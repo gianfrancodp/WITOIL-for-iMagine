@@ -187,20 +187,20 @@ class PredArgsSchema(marshmallow.Schema):
         load_default=[0.75],
     )
 
-    plot_lon = fields.List(
-        cls_or_instance=fields.Float,
-        metadata={
-            "description": "Longitudinal boundaries for plotting.",
-        },
-        load_default=[35.5, 36.5],
-    )
-
     plot_lat = fields.List(
         cls_or_instance=fields.Float,
         metadata={
             "description": "Latitudinal boundaries for plotting.",
         },
         load_default=[35, 36],
+    )
+    
+    plot_lon = fields.List(
+        cls_or_instance=fields.Float,
+        metadata={
+            "description": "Longitudinal boundaries for plotting.",
+        },
+        load_default=[35.5, 36.5],
     )
 
     accept = fields.String(
