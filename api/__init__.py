@@ -84,13 +84,7 @@ def predict(**options):
             "spill_duration"
         ]
         tdata["simulation"]["spill_rate"] = options["spill_rate"]
-        tdata["simulation"]["slick_age"] = options["slick_age"]
         tdata["simulation"]["oil"] = options["oil"]
-        tdata["simulation"]["area_spill"] = options["area_spill"]
-        tdata["simulation"]["area_vertex"] = options["area_vertex"]
-        tdata["simulation"]["multiple_slick"] = options[
-            "multiple_slick"
-        ]
         tdata["download"]["copernicus_user"] = options[
             "copernicus_user"
         ]

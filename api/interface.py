@@ -90,21 +90,7 @@ class MedslikII:
             )
         self.lat_min, self.lat_max = lat_min, lat_max
         self.lon_min, self.lon_max = lon_min, lon_max
-        self.apply_aging_effects()
         self.initial_checking()
-
-    def apply_aging_effects(self) -> None:
-        """
-        Consider aging when setting
-        the simulation length and the start datetime.
-        """
-        oilspill = self.config["simulation"]
-        age = oilspill["slick_age"]
-        if self.n_spill_points > 1:
-            oilspill["sim_length"] += age
-            oilspill["start_datetime"] -= pd.Timedelta(hours=age)
-            oilspill["spill_duration"] = 0
-        self.config["simulation"] = oilspill
 
     def initial_checking(self):
         """
@@ -129,23 +115,6 @@ class MedslikII:
         logger.info(
             "No major issues found on dates and oil spill coordinates"
         )
-
-        # checking if starting from area spill
-        if self.config["input_files"]["shapefile"]["shape_path"]:
-            shapefile_path = self.config["input_files"]["shapefile"][
-                "shape_path"
-            ]
-            # if simulation starts from shapefile, the volume will be disconsidered
-            if os.path.exists(shapefile_path):
-                logger.info(
-                    f"Simulation initial conditions area spill are provided on \
-                        {self.config['input_files']['shapefile']['shape_path']}. \
-                        Spill rate from config files will not be considered"
-                )
-                volume = Utils.oil_volume_shapefile(self.config)
-
-                # Correcting volume on the config object
-                self.config["simulation"]["spill_rate"] = volume
 
     @staticmethod
     def data_download_medslik(
@@ -256,7 +225,6 @@ class MedslikII:
         lon_max,
         lat_min,
         lat_max,
-        n_spill_points,
     ):
         """
         Run preprocessing.
@@ -309,77 +277,33 @@ class MedslikII:
                     config["input_files"]["dtm"]["coastline_path"]
                 )
 
-            if config["input_files"]["shapefile"]["shape_path"]:
-                shapefile_path = config["input_files"]["shapefile"][
-                    "shape_path"
-                ]
-                if os.path.exists(shapefile_path):
-                    # using an area spill identified on a shapefile to generate initial conditions
-                    preproc.process_initial_shapefile()
-
             spill_dictionary = {}
-            if n_spill_points > 1:
-                logger.info(
-                    f"Starting to write {n_spill_points} events of oil spill"
-                )
-                for i, dur in enumerate(config["spill_rate"]):
-                    # obtaining the variables
-                    spill_dictionary["simname"] = preproc.simname
-                    spill_dictionary["dt_sim"] = config["simulation"][
-                        "start_datetime"
-                    ]
-                    spill_dictionary["sim_length"] = (
-                        preproc.sim_length
-                    )
-                    spill_dictionary["longitude"] = config[
-                        "simulation"
-                    ]["spill_lon"][i]
-                    spill_dictionary["latitude"] = config[
-                        "simulation"
-                    ]["spill_lat"][i]
-                    spill_dictionary["spill_duration"] = int(
-                        config["simulation"]["spill_duration"][i]
-                    )
-                    spill_dictionary["spill_rate"] = config[
-                        "simulation"
-                    ]["spill_rate"][i]
-                    spill_dictionary["oil_api"] = config[
-                        "simulation"
-                    ]["oil"][i]
-                    spill_dictionary["number_slick"] = 1
-                    preproc.write_config_files(
-                        spill_dictionary,
-                        separate_slicks=True,
-                        s_num=i,
-                    )
-
-            else:
-                logger.info("Writing single slick event")
-                spill_dictionary["simname"] = preproc.simname
-                spill_dictionary["dt_sim"] = config["simulation"][
-                    "start_datetime"
-                ]
-                spill_dictionary["sim_length"] = int(
-                    preproc.sim_length
-                )
-                spill_dictionary["longitude"] = config["simulation"][
-                    "spill_lon"
-                ][0]
-                spill_dictionary["latitude"] = config["simulation"][
-                    "spill_lat"
-                ][0]
-                spill_dictionary["spill_duration"] = int(
-                    config["simulation"]["spill_duration"][0]
-                )
-                spill_dictionary["spill_rate"] = config["simulation"][
-                    "spill_rate"
-                ][0]
-                spill_dictionary["oil_api"] = config["simulation"][
-                    "oil"
-                ][0]
-                preproc.write_config_files(
-                    spill_dictionary, separate_slicks=False
-                )
+            logger.info("Writing single slick event")
+            spill_dictionary["simname"] = preproc.simname
+            spill_dictionary["dt_sim"] = config["simulation"][
+                "start_datetime"
+            ]
+            spill_dictionary["sim_length"] = int(
+                preproc.sim_length
+            )
+            spill_dictionary["longitude"] = config["simulation"][
+                "spill_lon"
+            ][0]
+            spill_dictionary["latitude"] = config["simulation"][
+                "spill_lat"
+            ][0]
+            spill_dictionary["spill_duration"] = int(
+                config["simulation"]["spill_duration"][0]
+            )
+            spill_dictionary["spill_rate"] = config["simulation"][
+                "spill_rate"
+            ][0]
+            spill_dictionary["oil_api"] = config["simulation"][
+                "oil"
+            ][0]
+            preproc.write_config_files(
+                spill_dictionary
+            )
 
             logger.info("Modfying medslik_II.for")
             preproc.process_medslik_memmory_array()
@@ -390,7 +314,7 @@ class MedslikII:
             else:
                 logger.info("Using standard parameters")
 
-    def run_medslik_sim(self, simdir, simname, separate_slicks=False):
+    def run_medslik_sim(self, simdir, simname):
 
         # model directory. Could be changed, but will remain fixed for the time being.
         model_dir = "WITOIL_iMagine/src/model/"
@@ -407,58 +331,32 @@ class MedslikII:
         if os.path.exists(output_dir):
             shutil.rmtree(output_dir)
 
-        if not separate_slicks:
-            # Copy METOCEAN files
-            oce_files = gg(f"{simdir}{simname}/oce_files/*.mrc")
-            met_files = gg(f"{simdir}{simname}/met_files/*.eri")
-            bnc_files = gg(f"{simdir}{simname}/bnc_files/*")
-            xp_files = {
-                "medslik_II.for": os.path.join(simdir, simname, "xp_files", "medslik_II.for"),
-                "config2.txt": os.path.join(simdir, simname, "xp_files", "config2.txt"),
-                "config1.txt": os.path.join(simdir, simname, "xp_files", "config1.txt"),
-            }
+        oce_files = gg(f"{simdir}{simname}/oce_files/*.mrc")
+        met_files = gg(f"{simdir}{simname}/met_files/*.eri")
+        bnc_files = gg(f"{simdir}{simname}/bnc_files/*")
+        xp_files = {
+            "medslik_II.for": os.path.join(simdir, simname, "xp_files", "medslik_II.for"),
+            "config2.txt": os.path.join(simdir, simname, "xp_files", "config2.txt"),
+            "config1.txt": os.path.join(simdir, simname, "xp_files", "config1.txt"),
+        }
 
-            # Copy METOCEAN, MET, and BNC files
-            for file in oce_files:
-                shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "OCE"))
-            for file in met_files:
-                shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "MET"))
-            for file in bnc_files:
-                shutil.copy(file, os.path.join(model_dir, "DTM_INP"))
+        # Copy METOCEAN, MET, and BNC files
+        for file in oce_files:
+            shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "OCE"))
+        for file in met_files:
+            shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "MET"))
+        for file in bnc_files:
+            shutil.copy(file, os.path.join(model_dir, "DTM_INP"))
 
-            # Copy other required files
-            for dest, src in xp_files.items():
-                shutil.copy(src, os.path.join(model_dir, "RUN", dest if "config" in dest else "MODEL_SRC"))
+        # Copy other required files
+        for dest, src in xp_files.items():
+            shutil.copy(src, os.path.join(model_dir, "RUN", dest if "config" in dest else "MODEL_SRC"))
 
-            # Compile and start running (replacing `cd` with `cwd`)
-            compile_script = "MODEL_SRC/compile.sh"
-            run_script = "RUN.sh"
-            subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
-            subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
-
-        else:
-            # Handle separate slicks
-            slicks = gg(f"{simdir}{simname}/xp_files/*/")
-            for i, slick_dir in enumerate(slicks):
-                # Copy METOCEAN, MET, and BNC files
-                oce_files = gg(f"{simdir}{simname}/oce_files/*.mrc")
-                met_files = gg(f"{simdir}{simname}/met_files/*.eri")
-                bnc_files = gg(f"{simdir}{simname}/bnc_files/*")
-                config1_path = os.path.join(simdir, simname, f"xp_files/slick{i + 1}/config1.txt")
-
-                for file in oce_files:
-                    shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "OCE"))
-                for file in met_files:
-                    shutil.copy(file, os.path.join(model_dir, "RUN", "TEMP", "MET"))
-                for file in bnc_files:
-                    shutil.copy(file, os.path.join(model_dir, "DTM_INP"))
-                shutil.copy(config1_path, os.path.join(model_dir, "RUN", "config1.txt"))
-
-                # Compile and start running
-                compile_script = "MODEL_SRC/compile.sh"
-                run_script = "RUN.sh"
-                subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
-                subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
+        # Compile and start running (replacing `cd` with `cwd`)
+        compile_script = "MODEL_SRC/compile.sh"
+        run_script = "RUN.sh"
+        subprocess.run(["sh", compile_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
+        subprocess.run(["./" + run_script], check=True, cwd=os.path.join(model_dir, "RUN")) # nosec
 
         # Copy output files (replacing `cp -r`)
         output_dest = os.path.join(simdir, simname, "out_files")
@@ -501,7 +399,6 @@ def main_run(config_path=None):
         main.lon_max,
         main.lat_min,
         main.lat_max,
-        main.n_spill_points,
     )
     logger.info("End of pre processing ...")
 
@@ -511,38 +408,30 @@ def main_run(config_path=None):
         main.run_medslik_sim(
             "WITOIL_iMagine/cases/",
             main.config["simulation"]["name"],
-            separate_slicks=False,
         )
 
     # performing postprocessing
     if main.config["run_options"]["postprocessing"]:
-        multiple_slick = main.config["simulation"]["multiple_slick"]
         PostProcessing.create_concentration_dataset(
             lon_min=main.lon_min,
             lon_max=main.lon_max,
             lat_min=main.lat_min,
             lat_max=main.lat_max,
             filepath=main.out_directory,
-            multiple_slick=multiple_slick,
         )
 
     # plotting the results
-    if main.config["plot_options"]["plotting"]:
-        mplot = MedslikIIPlot(main)
-        mplot.plot_matplotlib(main.lon_min, main.lon_max, main.lat_min, main.lat_max)
-        mplot.plot_mass_balance()
-
     # if main.config["plot_options"]["plotting"]:
     #     mplot = MedslikIIPlot(main)
-    #     mplot.plot_matplotlib(
-    #         main.lon_min, main.lon_max, main.lat_min, main.lat_max
-    #     )
-    #     try:
-    #         mplot.plot_mass_balance()
-    #     except:
-    #         pass
+    #     mplot.plot_matplotlib(main.lon_min, main.lon_max, main.lat_min, main.lat_max)
+    #     mplot.plot_mass_balance()
 
-    # shutil.copy("WITOIL_iMagine/medslik_run.log", f"{main.out_directory}medslik_run.log")
+    if main.config["plot_options"]["plotting"]:
+        logger.info("Applying user-defined plot boundaries.")
+        
+        plot_lon = main.config["plot_options"].get("plot_lon", [main.lon_min, main.lon_max])
+        plot_lat = main.config["plot_options"].get("plot_lat", [main.lat_min, main.lat_max])
 
-    # if config_path is None:
-    #     shutil.copy("WITOIL_iMagine/config.toml", f"{main.out_directory}config.toml")
+        mplot = MedslikIIPlot(main)
+        mplot.plot_matplotlib(plot_lon[0], plot_lon[1], plot_lat[0], plot_lat[1])
+        mplot.plot_mass_balance()
