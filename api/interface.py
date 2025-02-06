@@ -421,22 +421,17 @@ def main_run(config_path=None):
         )
 
     # plotting the results
-    if main.config["plot_options"]["plotting"]:
-        mplot = MedslikIIPlot(main)
-        mplot.plot_matplotlib(main.lon_min, main.lon_max, main.lat_min, main.lat_max)
-        mplot.plot_mass_balance()
-
     # if main.config["plot_options"]["plotting"]:
     #     mplot = MedslikIIPlot(main)
-    #     mplot.plot_matplotlib(
-    #         main.lon_min, main.lon_max, main.lat_min, main.lat_max
-    #     )
-    #     try:
-    #         mplot.plot_mass_balance()
-    #     except:
-    #         pass
+    #     mplot.plot_matplotlib(main.lon_min, main.lon_max, main.lat_min, main.lat_max)
+    #     mplot.plot_mass_balance()
 
-    # shutil.copy("WITOIL_iMagine/medslik_run.log", f"{main.out_directory}medslik_run.log")
+    if main.config["plot_options"]["plotting"]:
+        logger.info("Applying user-defined plot boundaries.")
+        
+        plot_lon = main.config["plot_options"].get("plot_lon", [main.lon_min, main.lon_max])
+        plot_lat = main.config["plot_options"].get("plot_lat", [main.lat_min, main.lat_max])
 
-    # if config_path is None:
-    #     shutil.copy("WITOIL_iMagine/config.toml", f"{main.out_directory}config.toml")
+        mplot = MedslikIIPlot(main)
+        mplot.plot_matplotlib(plot_lon[0], plot_lon[1], plot_lat[0], plot_lat[1])
+        mplot.plot_mass_balance()
