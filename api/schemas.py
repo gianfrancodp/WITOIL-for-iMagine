@@ -118,15 +118,6 @@ class PredArgsSchema(marshmallow.Schema):
         load_default=[27.78],
     )
 
-    slick_age = fields.List(
-        cls_or_instance=fields.Float,
-        validate=validate.Length(min=1, max=5),
-        metadata={
-            "description": "List of ages of the oil slick in hours.",
-        },
-        load_default=[0.0],
-    )
-
     oil = fields.List(
         cls_or_instance=fields.Float,
         validate=validate.Length(min=1, max=5),
@@ -134,27 +125,6 @@ class PredArgsSchema(marshmallow.Schema):
             "description": "List of either API (number) of the oil or names (string). Names must be exact.",
         },
         load_default=[28],
-    )
-
-    area_spill = fields.Boolean(
-        metadata={
-            "description": "Whether area or points should be used for the spill.",
-        },
-        load_default=False,
-    )
-
-    area_vertex = fields.Boolean(
-        metadata={
-            "description": "Comprehends three levels of lists. 1st: all slicks. 2nd: individual slick. 3rd: Coordinates of each vertex in each individual slick.",
-        },
-        load_default=False,
-    )
-
-    multiple_slick = fields.Boolean(
-        metadata={
-            "description": "Whether there are multiple slicks.",
-        },
-        load_default=False,
     )
 
     copernicus_user = fields.String(
