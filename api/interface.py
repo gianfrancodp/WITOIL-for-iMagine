@@ -399,7 +399,6 @@ def main_run(config_path=None):
         main.lon_max,
         main.lat_min,
         main.lat_max,
-        main.n_spill_points,
     )
     logger.info("End of pre processing ...")
 
