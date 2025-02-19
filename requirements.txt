@@ -1,4 +1,4 @@
-# DEEPaaS framework requirements
+# DEEPaaS framework Requirements
 deepaas~=2.5.2
 aiohttp~=3.9.5
 yarl~=1.9.4
