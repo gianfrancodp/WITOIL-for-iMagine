@@ -75,6 +75,9 @@ RUN cd /srv/witoil-for-imagine/WITOIL_iMagine/data/ && \
     ln -s /data/gebco gebco && \
     ln -s /data/gshhs gshhs
 
+# Ensure compile.sh is executable
+RUN chmod +x /srv/witoil-for-imagine/WITOIL_iMagine/src/model/RUN/MODEL_SRC/compile.sh
+
 # Open ports: DEEPaaS (5000), Monitoring (6006), Jupyter (8888)
 EXPOSE 5000 6006 8888
 
