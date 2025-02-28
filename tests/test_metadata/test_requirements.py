@@ -1,4 +1,4 @@
-"""Testing module for api metadata. This is a test file designed to use pytest
+"""Testing module for API metadata. This is a test file designed to use pytest
 and prepared with some basic assertions as base to add your own tests.
 
 You can add new tests using the following structure:
